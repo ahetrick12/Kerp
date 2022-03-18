@@ -148,7 +148,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 221865029}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.444, z: -1.12}
+  m_LocalPosition: {x: 0, y: 4.7, z: -1.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1428749922}
@@ -168,8 +168,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensitivity: 3
-  height: 0.5
-  speed: 0.01
+  standHeight: 0.4
+  crouchHeight: 0.2
+  walkSpeed: 0.007
+  crouchSpeed: 0.003
+  runSpeed: 0.02
+  jumpStrength: 0.001
+  gravity: -0.0001
 --- !u!1 &594179061
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,7 +317,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.1
   far clip plane: 1000
   field of view: 60
   orthographic: 0
