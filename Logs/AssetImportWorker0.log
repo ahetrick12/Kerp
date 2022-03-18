@@ -139,3 +139,19 @@ Received Import Request.
 Start importing Assets/Models/TempCityBlock.blend using Guid(c3816796a175e4b4585e6dff9392d521) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5f1db6a7f79d52eec4b522eab39c4cd5') in 0.107337 seconds 
   Import took 0.109576 seconds .
 
+========================================================================
+Received Import Request.
+  Time since last request: 153.184702 seconds.
+  path: Assets/Scenes
+  artifactKey: Guid(cec57e8f4320994479dde63820a8e9ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes using Guid(cec57e8f4320994479dde63820a8e9ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '85d9ac9c9d1892149c4fa7efb6a847ea') in 0.003270 seconds 
+  Import took 0.016368 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.863492 seconds.
+  path: Assets/Scenes/Alex.unity
+  artifactKey: Guid(0bc46ae1fcb4ea0478f74492f0eff599) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Alex.unity using Guid(0bc46ae1fcb4ea0478f74492f0eff599) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3fd52034374f533de559b08341305a57') in 0.004992 seconds 
+  Import took 0.010571 seconds .
+
