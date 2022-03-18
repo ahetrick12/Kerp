@@ -132,6 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 113199724}
+  - component: {fileID: 113199725}
   m_Layer: 0
   m_Name: City Generation
   m_TagString: Untagged
@@ -153,6 +154,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &113199725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113199723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37c258ab9f077da498860a79d2dccb57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blockSize: 10
+  blockPrefabs:
+  - {fileID: 8533756582579848625, guid: 2c0e26c1f6ede7e4eb3af8940b12c4a9, type: 3}
+  - {fileID: 7754712505376580920, guid: 4665c6330fbf7db419aa80ea18e63cf7, type: 3}
+  - {fileID: 3575268530850698897, guid: 13d0f010a1534e74c9bce062ac59009a, type: 3}
+  - {fileID: 3717719623721684425, guid: d0e8c9144b5d44442976124b332612c5, type: 3}
+  - {fileID: 6719259514935551524, guid: 6e5ec4b8bd8be7748b6e6f5560dbbfda, type: 3}
+  - {fileID: 759489028662488829, guid: 03b672339207cce448e8cd0a05305e06, type: 3}
+  - {fileID: 3129502696454348285, guid: a00ff61e36cb760428eef8d194250dc5, type: 3}
+  - {fileID: 382847865469274750, guid: 9c76d9ecfa4cda44898dd45e87054e15, type: 3}
+  cityDimensions: {x: 15, y: 15}
 --- !u!1 &762230068
 GameObject:
   m_ObjectHideFlags: 0
