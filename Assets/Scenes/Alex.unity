@@ -166,7 +166,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37c258ab9f077da498860a79d2dccb57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockSize: 10
   blockPrefabs:
   - {fileID: 8533756582579848625, guid: 2c0e26c1f6ede7e4eb3af8940b12c4a9, type: 3}
   - {fileID: 7754712505376580920, guid: 4665c6330fbf7db419aa80ea18e63cf7, type: 3}
@@ -176,7 +175,10 @@ MonoBehaviour:
   - {fileID: 759489028662488829, guid: 03b672339207cce448e8cd0a05305e06, type: 3}
   - {fileID: 3129502696454348285, guid: a00ff61e36cb760428eef8d194250dc5, type: 3}
   - {fileID: 382847865469274750, guid: 9c76d9ecfa4cda44898dd45e87054e15, type: 3}
+  doorPrefab: {fileID: 5921180579994169814, guid: 24d6156cdd0a46c48a87138b3e5a16ae, type: 3}
+  blockSize: 10
   cityDimensions: {x: 15, y: 15}
+  maxRowOffset: 5
 --- !u!1 &762230068
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,6 +283,7 @@ GameObject:
   - component: {fileID: 1703726039}
   - component: {fileID: 1703726038}
   - component: {fileID: 1703726037}
+  - component: {fileID: 1703726040}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -346,10 +349,27 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1703726036}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: -0.24653375, y: -0.33848152, z: 0.09236833, w: -0.9033933}
+  m_LocalPosition: {x: -16.069227, y: 48.992348, z: -27.458374}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1703726040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1703726036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79dbba43b98e4d144b09b1e73c6f0eb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 10
+  fastMovementSpeed: 70
+  freeLookSensitivity: 3
+  zoomSensitivity: 10
+  fastZoomSensitivity: 50
