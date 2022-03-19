@@ -4,13 +4,22 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
+    public LevelManager.LevelType levelType;
+
     private Transform cam;
     private Transform promptText;
+
+    private LevelManager levelManager;
+
+    void Awake()
+    {
+        cam = Camera.main.transform;
+        levelManager = FindObjectOfType<LevelManager>();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        cam = Camera.main.transform;
         promptText = transform.GetChild(0).GetChild(0);
     }
 
@@ -24,5 +33,10 @@ public class Door : MonoBehaviour
     public void onHover()
     {
         promptText.gameObject.SetActive(true);
+    }
+
+    public void EnterDoor()
+    {
+        levelManager.EnterLevel(levelType);
     }
 }

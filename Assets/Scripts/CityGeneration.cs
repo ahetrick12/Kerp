@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class CityGeneration : MonoBehaviour
 {
-    public GameObject[] blockPrefabs;
+    [System.Serializable]
+    public struct Block {
+        public GameObject prefab;
+        [Range(0,1)]
+        public float chance;
+    }
+
+    public GameObject baseplate;
+    public Block[] blockPrefabs;
     public GameObject doorPrefab;
 
     [Space(20)]
@@ -36,12 +44,23 @@ public class CityGeneration : MonoBehaviour
 
             for (int j = 0; j < cityDimensions.y; j++)
             {
-                Transform block = Instantiate(blockPrefabs[Random.Range(0, blockPrefabs.Length)]).transform;
-
                 float xPos = (i - middle.x) * blockSize;
-                float yPos = (j - middle.y) * blockSize + placementOffset;
+                float zPos = (j - middle.y) * blockSize + placementOffset;
+                
+                GameObject bp = Instantiate(baseplate, new Vector3(xPos, 0, zPos), Quaternion.Euler(Vector3.right * -90), transform);
+                
+                int index;
+                float chance, threshold;
+                do
+                {
+                    index = Random.Range(0, blockPrefabs.Length);
+                    chance = Random.Range(blockPrefabs[index].chance, 1);
+                    threshold = 1 - blockPrefabs[index].chance;
+                } while (chance <= threshold);
+                
+                Transform block = Instantiate(blockPrefabs[index].prefab).transform;
 
-                block.position = new Vector3(xPos, 0, yPos);
+                block.position = new Vector3(xPos, 0, zPos);
                 block.eulerAngles = new Vector3(-90, 0, 90 * Random.Range(0, 3));
                 block.parent = transform;
                 
@@ -107,6 +126,7 @@ public class CityGeneration : MonoBehaviour
             Transform door = Instantiate(doorPrefab).transform;
             door.position = finalPoints[i].position;
             door.parent = finalPoints[i];
+            door.GetComponent<Door>().levelType = (LevelManager.LevelType)Random.Range(0, System.Enum.GetValues(typeof(LevelManager.LevelType)).Length);
             levelDoors[i] = door;
         }
     }
