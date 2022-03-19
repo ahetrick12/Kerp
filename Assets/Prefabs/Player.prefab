@@ -141,7 +141,7 @@ MonoBehaviour:
   collisionDistance: 0.3
   flightStartBoost: 1
   exitFlightCooldown: 0.5
-  flightSpeed: 3
+  flightSpeed: 5
   drag: 0.5
 --- !u!114 &33513395
 MonoBehaviour:

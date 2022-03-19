@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private float xRot = 0f;
     private float yRot = 0f;
     private Camera cam;
+    private Vector3 startingRot;
 
     [Header("Position variables")]
 
