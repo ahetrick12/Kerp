@@ -190,6 +190,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
             this.transform.Translate(velocity);
+
             
         }
         else
