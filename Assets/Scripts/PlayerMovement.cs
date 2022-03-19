@@ -48,6 +48,9 @@ public class PlayerMovement : MonoBehaviour
         cam = Camera.main;
         //acceleration = new Vector3(0, gravity, 0);
         height = standHeight;
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -190,7 +193,6 @@ public class PlayerMovement : MonoBehaviour
             }
 
             this.transform.Translate(velocity);
-
             
         }
         else
