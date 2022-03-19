@@ -28,7 +28,7 @@ public class Interactor : MonoBehaviour
             if (hit.transform.tag == "Door")
             {
                 Door door = hit.transform.GetComponentInParent<Door>(); 
-                door.onHover();
+                door.onHover(cam.transform);
 
                 if (interact)
                 {

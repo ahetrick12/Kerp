@@ -15,6 +15,8 @@ public class MarkerHandler : MonoBehaviour
 
     void Awake()
     {
+        if (LevelManager.inLevel) return;
+
         cityGen = FindObjectOfType<CityGeneration>();
         cam = Camera.main;
     }
@@ -22,6 +24,8 @@ public class MarkerHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (LevelManager.inLevel) return;
+
         levelDoors = cityGen.getLevelDoors();
         markers = new RectTransform[levelDoors.Length];
 
@@ -35,17 +39,22 @@ public class MarkerHandler : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        for (int i = 0; i < markers.Length; i++)
+        if (LevelManager.inLevel) return;
+
+        try
         {
-            if (levelDoors[i].GetComponent<Renderer>().isVisible)
+            for (int i = 0; i < markers.Length; i++)
             {
-                markers[i].gameObject.SetActive(true);
-                markers[i].position = cam.WorldToScreenPoint(levelDoors[i].position + Vector3.up * .5f);
+                if (levelDoors[i].GetComponentInChildren<Renderer>().isVisible)
+                {
+                    markers[i].gameObject.SetActive(true);
+                    markers[i].position = cam.WorldToScreenPoint(levelDoors[i].position + Vector3.up * .5f);
+                }
+                else
+                {
+                    markers[i].gameObject.SetActive(false);
+                }
             }
-            else
-            {
-                markers[i].gameObject.SetActive(false);
-            }
-        }
+        } catch {}
     }
 }
