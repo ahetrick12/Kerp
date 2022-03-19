@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     public float flightSpeed;
     private Vector3 flightAcceleration;
     public float drag;
-    public float flightColDistance;
+    public float collisionDistance;
 
     private Rigidbody rb;
 
@@ -106,6 +106,8 @@ public class PlayerMovement : MonoBehaviour
                 height = standHeight;
             }
 
+            Debug.Log("Height is: " + height);
+
             // Handle input for movement
 
             Vector3 lastMovement = Vector3.zero;
@@ -134,11 +136,11 @@ public class PlayerMovement : MonoBehaviour
                 lastMovement += -rightVector * speed;
             }
 
-            if(Input.GetKeyDown(KeyCode.Space) && this.transform.position.y - hit.point.y <= height)
+            if(Input.GetKeyDown(KeyCode.Space) && this.transform.position.y - hit.point.y <= height + 0.1f)
             {
                 velocity += new Vector3(0, jumpStrength, 0);
             }
-            else if(Input.GetKeyDown(KeyCode.Space) && this.transform.position.y - hit.point.y > height)
+            else if(Input.GetKeyDown(KeyCode.Space) && this.transform.position.y - hit.point.y > height + 0.1f)
             {
                 isFlying = true;
 
@@ -148,7 +150,11 @@ public class PlayerMovement : MonoBehaviour
 
             //Debug.Log(new Vector3(lastMovement.x, 0, lastMovement.y).magnitude * flightStartBoost);
 
-            this.transform.Translate(velocity);
+            if(!Physics.Raycast(this.transform.position, velocity, out hit, collisionDistance))
+            {
+                this.transform.Translate(velocity);
+            }
+            
         }
         else
         {
@@ -201,7 +207,7 @@ public class PlayerMovement : MonoBehaviour
             this.transform.Translate(velocity);
 
             RaycastHit hit;
-            if(Physics.Raycast(this.transform.position, velocity, out hit, flightColDistance))
+            if(Physics.Raycast(this.transform.position, velocity, out hit, collisionDistance))
             {
                 Debug.Log("Colliding in flight");
                 isFlying = false;
