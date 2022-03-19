@@ -150,10 +150,10 @@ public class PlayerMovement : MonoBehaviour
 
             //Debug.Log(new Vector3(lastMovement.x, 0, lastMovement.y).magnitude * flightStartBoost);
 
-            if(!Physics.Raycast(this.transform.position, velocity, out hit, collisionDistance))
-            {
-                this.transform.Translate(velocity);
-            }
+            // if(!Physics.Raycast(this.transform.position, velocity, out hit, collisionDistance))
+            // {
+            //     this.transform.Translate(velocity);
+            // }
             
         }
         else
