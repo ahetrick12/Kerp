@@ -465,13 +465,14 @@ GameObject:
   - component: {fileID: 1703726038}
   - component: {fileID: 1703726037}
   - component: {fileID: 1703726040}
+  - component: {fileID: 1703726041}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!81 &1703726037
 AudioListener:
   m_ObjectHideFlags: 0
@@ -549,11 +550,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79dbba43b98e4d144b09b1e73c6f0eb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 10
+  movementSpeed: 5
   fastMovementSpeed: 70
   freeLookSensitivity: 3
   zoomSensitivity: 10
   fastZoomSensitivity: 50
+--- !u!114 &1703726041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1703726036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b16f63d1da93645beb68ce108cf5ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reach: 1
 --- !u!1001 &1924373903
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -608,6 +622,10 @@ PrefabInstance:
     - target: {fileID: 2183161114238979427, guid: 1555fd3c5d68a9541872a21c8ec08df4, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2183161114238979427, guid: 1555fd3c5d68a9541872a21c8ec08df4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1555fd3c5d68a9541872a21c8ec08df4, type: 3}
