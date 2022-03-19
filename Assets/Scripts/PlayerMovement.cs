@@ -37,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
 
     private Vector3 velocity;
+    private Vector3 lastMovement;
     //private Vector3 acceleration;
 
     private Vector3 velSmoothTime;
@@ -106,35 +107,10 @@ public class PlayerMovement : MonoBehaviour
                 height = standHeight;
             }
 
-            Debug.Log("Height is: " + height);
+            //Debug.Log("Height is: " + height);
 
             // Handle input for movement
-
-            Vector3 lastMovement = Vector3.zero;
-
-            if(Input.GetKey(KeyCode.W))
-            {
-                this.transform.position += forwardVector * speed;
-                lastMovement += forwardVector * speed;
-            }
-
-            if(Input.GetKey(KeyCode.S))
-            {
-                this.transform.position += -forwardVector * speed;
-                lastMovement += -forwardVector * speed;
-            }
-
-            if(Input.GetKey(KeyCode.D))
-            {
-                this.transform.position += rightVector * speed;
-                lastMovement += rightVector * speed;
-            }
-
-            if(Input.GetKey(KeyCode.A))
-            {
-                this.transform.position += -rightVector * speed;
-                lastMovement += -rightVector * speed;
-            }
+            
 
             if(Input.GetKeyDown(KeyCode.Space) && this.transform.position.y - hit.point.y <= height + 0.1f)
             {
@@ -148,12 +124,73 @@ public class PlayerMovement : MonoBehaviour
                 velocity = new Vector3(lastMovement.x, jumpStrength, lastMovement.z) * flightStartBoost;
             }
 
-            //Debug.Log(new Vector3(lastMovement.x, 0, lastMovement.y).magnitude * flightStartBoost);
+            // Checks all potential movement
+            lastMovement = Vector3.zero;
+            if(Input.GetKey(KeyCode.W))
+            {
 
-            // if(!Physics.Raycast(this.transform.position, velocity, out hit, collisionDistance))
-            // {
-            //     this.transform.Translate(velocity);
-            // }
+                lastMovement += forwardVector * speed;
+            }
+
+            if(Input.GetKey(KeyCode.S))
+            {
+
+                lastMovement += -forwardVector * speed;
+            }
+
+            if(Input.GetKey(KeyCode.D))
+            {
+
+                lastMovement += rightVector * speed;
+            }
+
+            if(Input.GetKey(KeyCode.A))
+            {
+
+                lastMovement += -rightVector * speed;
+            }
+      
+            // don't move into a wall, but move if you can move 
+            Debug.DrawRay(this.transform.position, lastMovement, Color.magenta, 0.1f);
+            if(!Physics.Raycast(this.transform.position, lastMovement, out hit, collisionDistance))
+            {
+                if(Input.GetKey(KeyCode.W))
+                {
+                    this.transform.position += forwardVector * speed;
+
+                }
+
+                if(Input.GetKey(KeyCode.S))
+                {
+                    this.transform.position += -forwardVector * speed;
+
+                }
+
+                if(Input.GetKey(KeyCode.D))
+                {
+                    this.transform.position += rightVector * speed;
+
+                }
+
+                if(Input.GetKey(KeyCode.A))
+                {
+                    this.transform.position += -rightVector * speed;
+
+                }
+                
+            }
+
+            Debug.DrawRay(this.transform.position, velocity, Color.red);
+
+            if(Physics.Raycast(this.transform.position, velocity, out hit, collisionDistance))
+            {
+                //this.transform.Translate(velocity);
+                velocity = -velocity / 4;//Vector3.zero;
+                //Debug.Log("Velocity mag: " + velocity.magnitude);
+            }
+
+            this.transform.Translate(velocity);
+
             
         }
         else
