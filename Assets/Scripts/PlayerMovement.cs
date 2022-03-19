@@ -178,7 +178,7 @@ public class PlayerMovement : MonoBehaviour
         lastMovement.y = 0;
     
         // don't move into a wall, but move if you can move 
-        Debug.DrawRay(this.transform.position, lastMovement, Color.magenta, 0.1f);
+        //Debug.DrawRay(this.transform.position, lastMovement, Color.magenta, 0.1f);
         if(!Physics.Raycast(this.transform.position, lastMovement, out hit, collisionDistance))
         {
             transform.position += lastMovement * Time.deltaTime;            
