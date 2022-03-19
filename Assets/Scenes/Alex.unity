@@ -123,6 +123,24 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &33513394 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2183161114238979427, guid: 1555fd3c5d68a9541872a21c8ec08df4, type: 3}
+  m_PrefabInstance: {fileID: 1924373903}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &33513395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 33513394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b16f63d1da93645beb68ce108cf5ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reach: 1
 --- !u!1 &113199723
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,10 +195,10 @@ MonoBehaviour:
   - {fileID: 382847865469274750, guid: 9c76d9ecfa4cda44898dd45e87054e15, type: 3}
   doorPrefab: {fileID: 5921180579994169814, guid: 24d6156cdd0a46c48a87138b3e5a16ae, type: 3}
   blockSize: 10
-  cityDimensions: {x: 15, y: 15}
+  cityDimensions: {x: 5, y: 5}
   maxRowOffset: 5
   levelCount: 5
-  minLevelSpawnDistance: 50
+  minLevelSpawnDistance: 10
 --- !u!1 &762230068
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,7 +490,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &1703726037
 AudioListener:
   m_ObjectHideFlags: 0
@@ -619,13 +637,45 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2183161114238979425, guid: 1555fd3c5d68a9541872a21c8ec08df4, type: 3}
+      propertyPath: gravity
+      value: -0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 2183161114238979425, guid: 1555fd3c5d68a9541872a21c8ec08df4, type: 3}
+      propertyPath: runSpeed
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2183161114238979425, guid: 1555fd3c5d68a9541872a21c8ec08df4, type: 3}
+      propertyPath: walkSpeed
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2183161114238979425, guid: 1555fd3c5d68a9541872a21c8ec08df4, type: 3}
+      propertyPath: hideCursor
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2183161114238979425, guid: 1555fd3c5d68a9541872a21c8ec08df4, type: 3}
+      propertyPath: crouchSpeed
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2183161114238979425, guid: 1555fd3c5d68a9541872a21c8ec08df4, type: 3}
+      propertyPath: flightSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2183161114238979425, guid: 1555fd3c5d68a9541872a21c8ec08df4, type: 3}
+      propertyPath: crouchHeight
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2183161114238979425, guid: 1555fd3c5d68a9541872a21c8ec08df4, type: 3}
+      propertyPath: jumpStrength
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2183161114238979427, guid: 1555fd3c5d68a9541872a21c8ec08df4, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 2183161114238979427, guid: 1555fd3c5d68a9541872a21c8ec08df4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1555fd3c5d68a9541872a21c8ec08df4, type: 3}

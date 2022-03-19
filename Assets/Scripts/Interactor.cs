@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Interactor : MonoBehaviour
 {
-    public float reach = 5;
+    public float reach = 1;
 
     private Camera cam;
 
