@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7023632626234214498
+--- !u!1 &2183161113300473721
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7023632626234214495}
-  - component: {fileID: 7023632626234214492}
-  - component: {fileID: 7023632626234214493}
+  - component: {fileID: 2183161113300473668}
+  - component: {fileID: 2183161113300473671}
+  - component: {fileID: 2183161113300473670}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -18,27 +18,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7023632626234214495
+--- !u!4 &2183161113300473668
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7023632626234214498}
+  m_GameObject: {fileID: 2183161113300473721}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 7023632627711693435}
+  m_Father: {fileID: 2183161114238979424}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!20 &7023632626234214492
+--- !u!20 &2183161113300473671
 Camera:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7023632626234214498}
+  m_GameObject: {fileID: 2183161113300473721}
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
@@ -75,15 +75,15 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &7023632626234214493
+--- !u!81 &2183161113300473670
 AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7023632626234214498}
+  m_GameObject: {fileID: 2183161113300473721}
   m_Enabled: 1
---- !u!1 &7023632627711693432
+--- !u!1 &2183161114238979427
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,53 +91,68 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7023632627711693435}
-  - component: {fileID: 7023632627711693434}
+  - component: {fileID: 2183161114238979424}
+  - component: {fileID: 2183161114238979425}
+  - component: {fileID: 33513395}
   m_Layer: 0
-  m_Name: Player 1
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7023632627711693435
+--- !u!4 &2183161114238979424
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7023632627711693432}
+  m_GameObject: {fileID: 2183161114238979427}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 4.7, z: -1.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 7023632626234214495}
+  - {fileID: 2183161113300473668}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7023632627711693434
+--- !u!114 &2183161114238979425
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7023632627711693432}
+  m_GameObject: {fileID: 2183161114238979427}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 73577d8780ce513419d5290896117091, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sensitivity: 3
+  hideCursor: 1
   standHeight: 0.4
-  crouchHeight: 0.2
-  walkSpeed: 0.007
-  crouchSpeed: 0.003
-  runSpeed: 0.02
-  jumpStrength: 0.007
-  gravity: -0.0001
-  flightStartBoost: 1
+  crouchHeight: 0.25
+  walkSpeed: 0.8
+  crouchSpeed: 0.3
+  runSpeed: 1.6
+  jumpStrength: 1
+  gravity: -0.03
   friction: 0.1
+  collisionDistance: 0.3
+  flightStartBoost: 1
   exitFlightCooldown: 0.5
-  flightSpeed: 0.08
+  flightSpeed: 5
   drag: 0.5
-  collisionDistance: 2
+--- !u!114 &33513395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2183161114238979427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b16f63d1da93645beb68ce108cf5ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reach: 1

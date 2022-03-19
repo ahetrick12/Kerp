@@ -25,7 +25,6 @@ public class MarkerHandler : MonoBehaviour
         levelDoors = cityGen.getLevelDoors();
         markers = new RectTransform[levelDoors.Length];
 
-        print(levelDoors);
         for(int i = 0; i < levelDoors.Length; i++)
         {
             GameObject marker = Instantiate(markerPrefab, transform.position, Quaternion.identity, transform);

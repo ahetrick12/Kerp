@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Mouse variables")]
+
     // mouse vars
     public float sensitivity;
-    //private float horizontalSens; // sensitivity
-    //private float verticalSens; // sensitivity
+    public bool hideCursor = false;
+    
     private float xRot = 0f;
     private float yRot = 0f;
     private Camera cam;
+    private Vector3 startingRot;
+
+    [Header("Position variables")]
 
     // position vars
     public float standHeight;
@@ -19,238 +24,218 @@ public class PlayerMovement : MonoBehaviour
     public float walkSpeed;
     public float crouchSpeed;
     public float runSpeed;
+
     private float speed;
-    private bool isFlying = false;
+    private float speedSmoothVel;
+    private float heightSmoothVel;
+
+    [Space(10)]
+
     public float jumpStrength;
     public float gravity;
-    public float flightStartBoost;
     public float friction;
-       
-    public float exitFlightCooldown;  // while in flight
-    private float lastTap;
-
-    public float flightSpeed;
-    private Vector3 flightAcceleration;
-    public float drag;
     public float collisionDistance;
 
-    private Rigidbody rb;
+
+    [Header("Flight variables")]
+
+    // flight vars
+    public float flightStartBoost;       
+    public float exitFlightCooldown;  // while in flight
+    public float flightSpeed;
+    public float drag;
+    private Vector3 flightAcceleration;
+    private float lastTap;
+    private bool isFlying = false;
 
     private Vector3 velocity;
     private Vector3 lastMovement;
-    //private Vector3 acceleration;
-
     private Vector3 velSmoothTime;
 
     // Start is called before the first frame update
     void Start()
     {
         cam = Camera.main;
-        //acceleration = new Vector3(0, gravity, 0);
         height = standHeight;
+
+        if (hideCursor)
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
     }
 
     // Update is called once per frame
     void Update()
+    { 
+        UpdatePosition();
+    }
+
+    void LateUpdate()
     {
         UpdateLookRotation();
-
-        UpdatePosition();
     }
 
     private void UpdatePosition()
     {
-
-        //velocity = Vector3.zero;
-        
-        //velocity += new Vector3(0, gravity, 0);
-
         if(!isFlying)
         {
-
-            velocity += new Vector3(0, gravity, 0); // ACCELERATION
-
-            RaycastHit hit;
-            Physics.Raycast(this.transform.position, Vector3.down, out hit);
-
-            //Debug.Log(this.transform.position.y - hit.point.y + " and height is " + height);
-            if(this.transform.position.y - hit.point.y <= height)
-            {
-                this.transform.position = new Vector3(hit.point.x, hit.point.y + height, hit.point.z);
-                //Debug.Log(this.transform.position.y - hit.point.y);
-                velocity = new Vector3(velocity.x, 0, velocity.z);
-                velocity = Vector3.SmoothDamp(velocity, new Vector3(0, 0, 0), ref velSmoothTime, friction);
-            }
-            else
-            {
-                this.transform.position += new Vector3(0, velocity.y, 0);
-            }
-            
-            
-            Vector3 forwardVector = new Vector3(cam.transform.forward.x, 0f, cam.transform.forward.z).normalized;
-            Vector3 rightVector = new Vector3(cam.transform.right.x, 0f, cam.transform.right.z).normalized;
-
-            // Handle special movement cases
-            if(Input.GetKey(KeyCode.LeftShift))
-            {
-                speed = runSpeed;
-                height = standHeight;
-            }
-            else if(Input.GetKey(KeyCode.LeftControl))
-            {
-                speed = crouchSpeed;
-                height = crouchHeight;
-            }
-            else
-            {
-                speed = walkSpeed;
-                height = standHeight;
-            }
-
-            //Debug.Log("Height is: " + height);
-
-            // Handle input for movement
-            
-
-            if(Input.GetKeyDown(KeyCode.Space) && this.transform.position.y - hit.point.y <= height + 0.1f)
-            {
-                velocity += new Vector3(0, jumpStrength, 0);
-            }
-            else if(Input.GetKeyDown(KeyCode.Space) && this.transform.position.y - hit.point.y > height + 0.1f)
-            {
-                isFlying = true;
-
-                Debug.Log("Begin flight");
-                velocity = new Vector3(lastMovement.x, jumpStrength, lastMovement.z) * flightStartBoost;
-            }
-
-            // Checks all potential movement
-            lastMovement = Vector3.zero;
-            if(Input.GetKey(KeyCode.W))
-            {
-
-                lastMovement += forwardVector * speed;
-            }
-
-            if(Input.GetKey(KeyCode.S))
-            {
-
-                lastMovement += -forwardVector * speed;
-            }
-
-            if(Input.GetKey(KeyCode.D))
-            {
-
-                lastMovement += rightVector * speed;
-            }
-
-            if(Input.GetKey(KeyCode.A))
-            {
-
-                lastMovement += -rightVector * speed;
-            }
-      
-            // don't move into a wall, but move if you can move 
-            Debug.DrawRay(this.transform.position, lastMovement, Color.magenta, 0.1f);
-            if(!Physics.Raycast(this.transform.position, lastMovement, out hit, collisionDistance))
-            {
-                if(Input.GetKey(KeyCode.W))
-                {
-                    this.transform.position += forwardVector * speed;
-
-                }
-
-                if(Input.GetKey(KeyCode.S))
-                {
-                    this.transform.position += -forwardVector * speed;
-
-                }
-
-                if(Input.GetKey(KeyCode.D))
-                {
-                    this.transform.position += rightVector * speed;
-
-                }
-
-                if(Input.GetKey(KeyCode.A))
-                {
-                    this.transform.position += -rightVector * speed;
-
-                }
-                
-            }
-
-            Debug.DrawRay(this.transform.position, velocity, Color.red);
-
-            if(Physics.Raycast(this.transform.position, velocity, out hit, collisionDistance))
-            {
-                //this.transform.Translate(velocity);
-                velocity = -velocity / 4;//Vector3.zero;
-                //Debug.Log("Velocity mag: " + velocity.magnitude);
-            }
-
-            this.transform.Translate(velocity);
-
-            
+            OnGround();            
         }
         else
         {
-            velocity += Vector3.zero;
+            InFlight();
+        }
+    }
 
-            //Debug.Log("Is velocity zero? " + velocity.magnitude);
+    private void OnGround()
+    {
+        velocity += new Vector3(0, gravity, 0); // ACCELERATION
+        this.transform.Translate(velocity * Time.deltaTime);
 
-            if(Input.GetKeyDown(KeyCode.Space))
+        // Handle special movement cases
+        if(Input.GetKey(KeyCode.LeftControl))
+        {
+            // Smooth to crouch speed and height
+            speed = Mathf.SmoothDamp(speed, crouchSpeed, ref speedSmoothVel, 0.1f);
+            height = Mathf.SmoothDamp(height, crouchHeight, ref heightSmoothVel, 0.1f);;
+        }
+        else
+        {
+            // Change speed based on if sprinting
+            if(Input.GetKey(KeyCode.LeftShift))
             {
-                if(lastTap + exitFlightCooldown > Time.time)
-                {
-                    isFlying = false;
-                    
-                }
-                else
-                {
-                    lastTap = Time.time;
-                }
+                speed = Mathf.SmoothDamp(speed, runSpeed, ref speedSmoothVel, 0.1f);
+            }
+            else
+            {
+                speed = Mathf.SmoothDamp(speed, walkSpeed, ref speedSmoothVel, 0.1f);
             }
 
-            Vector3 flyingVector = new Vector3(cam.transform.forward.x, cam.transform.forward.y, cam.transform.forward.z).normalized;
-            Vector3 flyingRightVector = new Vector3(cam.transform.right.x, cam.transform.right.y, cam.transform.right.z).normalized;
+            // Stand if not crouching
+            height = Mathf.SmoothDamp(height, standHeight, ref heightSmoothVel, 0.1f);
+        }
 
-            if(Input.GetKey(KeyCode.W))
-            {
-                flightAcceleration += flyingVector * flightSpeed;
-            }
+        RaycastHit hit;
+        Physics.Raycast(this.transform.position, Vector3.down, out hit);
 
-            if(Input.GetKey(KeyCode.S))
-            {
-                flightAcceleration += -flyingVector * flightSpeed;
-            }
-
-            if(Input.GetKey(KeyCode.D))
-            {
-                flightAcceleration += flyingRightVector * flightSpeed;
-            }
-
-            if(Input.GetKey(KeyCode.A))
-            {
-                flightAcceleration += -flyingRightVector * flightSpeed;
-            }
-
-
-            velocity = Vector3.SmoothDamp(velocity, flightAcceleration, ref velSmoothTime, drag);
-            flightAcceleration = Vector3.zero;
-
-            velocity = Vector3.ClampMagnitude(velocity, flightSpeed);
+        // On ground OR if on ground and crouching
+        if(this.transform.position.y - hit.point.y <= height || (this.transform.position.y - hit.point.y > crouchHeight && Input.GetKey(KeyCode.LeftControl)))
+        {
+            this.transform.position = new Vector3(hit.point.x, hit.point.y + height, hit.point.z);
             
-            this.transform.Translate(velocity);
+            velocity = new Vector3(velocity.x, 0, velocity.z);
+            velocity = Vector3.SmoothDamp(velocity, new Vector3(0, 0, 0), ref velSmoothTime, friction);
+        }
+        else
+        {
+            this.transform.position += new Vector3(0, velocity.y, 0) * Time.deltaTime;
+        }
+        
+        Vector3 forwardVector = new Vector3(cam.transform.forward.x, 0f, cam.transform.forward.z).normalized;
+        Vector3 rightVector = new Vector3(cam.transform.right.x, 0f, cam.transform.right.z).normalized;
 
-            RaycastHit hit;
-            if(Physics.Raycast(this.transform.position, velocity, out hit, collisionDistance))
+        // Handle input for movement
+        if(Input.GetKeyDown(KeyCode.Space) && this.transform.position.y - hit.point.y <= height + 0.1f)
+        {
+            velocity += new Vector3(0, jumpStrength, 0);
+        }
+        else if(Input.GetKeyDown(KeyCode.Space) && this.transform.position.y - hit.point.y > height + 0.1f)
+        {
+            isFlying = true;
+
+            velocity = new Vector3(lastMovement.x, jumpStrength, lastMovement.z) * flightStartBoost;
+        }
+
+        // Checks all potential movement
+        lastMovement = Vector3.zero;
+        if(Input.GetKey(KeyCode.W))
+        {
+            lastMovement += forwardVector * speed;
+        }
+
+        if(Input.GetKey(KeyCode.S))
+        {
+            lastMovement += -forwardVector * speed;
+        }
+
+        if(Input.GetKey(KeyCode.D))
+        {
+            lastMovement += rightVector * speed;
+        }
+
+        if(Input.GetKey(KeyCode.A))
+        {
+            lastMovement += -rightVector * speed;
+        }
+
+        lastMovement.y = 0;
+    
+        // don't move into a wall, but move if you can move 
+        Debug.DrawRay(this.transform.position, lastMovement, Color.magenta, 0.1f);
+        if(!Physics.Raycast(this.transform.position, lastMovement, out hit, collisionDistance))
+        {
+            transform.position += lastMovement * Time.deltaTime;            
+        }
+
+        Debug.DrawRay(this.transform.position, velocity, Color.red);
+
+        if(Physics.Raycast(this.transform.position, velocity, out hit, collisionDistance))
+        {
+            velocity = -velocity / 4;
+        }
+    }
+
+    private void InFlight()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            if(lastTap + exitFlightCooldown > Time.time)
             {
-                Debug.Log("Colliding in flight");
                 isFlying = false;
+            }
+            else
+            {
+                lastTap = Time.time;
             }
         }
 
+        Vector3 flyingVector = new Vector3(cam.transform.forward.x, cam.transform.forward.y, cam.transform.forward.z).normalized;
+        Vector3 flyingRightVector = new Vector3(cam.transform.right.x, cam.transform.right.y, cam.transform.right.z).normalized;
+
+        flightAcceleration = Vector3.zero;
+        if(Input.GetKey(KeyCode.W))
+        {
+            flightAcceleration += flyingVector * flightSpeed;
+        }
+
+        if(Input.GetKey(KeyCode.S))
+        {
+            flightAcceleration += -flyingVector * flightSpeed;
+        }
+
+        if(Input.GetKey(KeyCode.D))
+        {
+            flightAcceleration += flyingRightVector * flightSpeed;
+        }
+
+        if(Input.GetKey(KeyCode.A))
+        {
+            flightAcceleration += -flyingRightVector * flightSpeed;
+        }
+
+
+        velocity = Vector3.SmoothDamp(velocity, flightAcceleration, ref velSmoothTime, drag);
+
+        velocity = Vector3.ClampMagnitude(velocity, flightSpeed);
+        this.transform.Translate(velocity * Time.deltaTime);
+
+        RaycastHit hit;
+        if(Physics.Raycast(this.transform.position, velocity, out hit, collisionDistance))
+        {
+            Debug.Log("Colliding in flight");
+            isFlying = false;
+        }
     }
 
     private void UpdateLookRotation()
