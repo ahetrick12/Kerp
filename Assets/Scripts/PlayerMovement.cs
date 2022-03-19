@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     public float jumpStrength;
     public float gravity;
     public float flightStartBoost;
+    public float friction;
        
     public float exitFlightCooldown;  // while in flight
     private float lastTap;
@@ -77,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
                 this.transform.position = new Vector3(hit.point.x, hit.point.y + height, hit.point.z);
                 //Debug.Log(this.transform.position.y - hit.point.y);
                 velocity = new Vector3(velocity.x, 0, velocity.z);
-                velocity = Vector3.SmoothDamp(velocity, new Vector3(0, 0, 0), ref velSmoothTime, drag / 2);
+                velocity = Vector3.SmoothDamp(velocity, new Vector3(0, 0, 0), ref velSmoothTime, friction);
             }
             else
             {

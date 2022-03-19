@@ -176,6 +176,7 @@ MonoBehaviour:
   jumpStrength: 0.007
   gravity: -0.0001
   flightStartBoost: 1
+  friction: 0.1
   exitFlightCooldown: 0.5
   flightSpeed: 0.08
   drag: 0.5
