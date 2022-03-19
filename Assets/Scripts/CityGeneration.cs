@@ -15,17 +15,18 @@ public class CityGeneration : MonoBehaviour
     
     [Space(20)]
 
-    public float levelCount = 5;
+    public int levelCount = 5;
     public float minLevelSpawnDistance = 50;
 
     private float placementOffset;
     private Transform hubBlock;
     private List<Transform> spawnpoints = new List<Transform>();
+    private Transform[] levelDoors;
 
     private bool assignHubFlag = false;
 
     // Start is called before the first frame update
-    private void Start()
+    private void Awake()
     {
         Vector2 middle = new Vector2((int)(cityDimensions.x / 2), (int)(cityDimensions.y / 2));
 
@@ -50,9 +51,6 @@ public class CityGeneration : MonoBehaviour
                     if(tr.tag == "Spawnpoint")
                     {
                         spawnpoints.Add(tr);
-                        // Transform door = Instantiate(doorPrefab).transform;
-                        // door.position = tr.position;
-                        // door.parent = tr;
                     }
                 }
 
@@ -103,12 +101,17 @@ public class CityGeneration : MonoBehaviour
         }
 
         // Spawn doors at final points
-        foreach(Transform point in finalPoints)
+        levelDoors = new Transform[levelCount];
+        for(int i = 0; i < finalPoints.Count; i++)
         {
             Transform door = Instantiate(doorPrefab).transform;
-            door.position = point.position;
-            door.parent = point;
-            Debug.DrawLine(door.position, door.position + Vector3.up * 50, Color.red);
+            door.position = finalPoints[i].position;
+            door.parent = finalPoints[i];
+            levelDoors[i] = door;
         }
+    }
+
+    public Transform[] getLevelDoors() {
+        return levelDoors;
     }
 }
