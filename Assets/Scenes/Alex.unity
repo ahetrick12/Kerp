@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 113199724}
   - component: {fileID: 113199725}
+  - component: {fileID: 113199726}
   m_Layer: 0
   m_Name: City Generation
   m_TagString: Untagged
@@ -175,12 +176,31 @@ MonoBehaviour:
   - {fileID: 759489028662488829, guid: 03b672339207cce448e8cd0a05305e06, type: 3}
   - {fileID: 3129502696454348285, guid: a00ff61e36cb760428eef8d194250dc5, type: 3}
   - {fileID: 382847865469274750, guid: 9c76d9ecfa4cda44898dd45e87054e15, type: 3}
+  - {fileID: 4099413254749917215, guid: 65d6085b47f3e2c4bb0cc435be7e06db, type: 3}
   doorPrefab: {fileID: 5921180579994169814, guid: 24d6156cdd0a46c48a87138b3e5a16ae, type: 3}
   blockSize: 10
-  cityDimensions: {x: 5, y: 5}
+  cityDimensions: {x: 10, y: 10}
   maxRowOffset: 5
   levelCount: 5
   minLevelSpawnDistance: 10
+--- !u!114 &113199726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113199723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66e896e5f3d985a48868f49f85fc4a1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  easyLevelNames:
+  - EasyLevel
+  mediumLevelNames:
+  - MediumLevel
+  hardLevelNames:
+  - HardLevel
 --- !u!1 &762230068
 GameObject:
   m_ObjectHideFlags: 0

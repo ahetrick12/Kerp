@@ -55,7 +55,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.1
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -135,7 +135,7 @@ MonoBehaviour:
   walkSpeed: 0.8
   crouchSpeed: 0.3
   runSpeed: 1.6
-  jumpStrength: 1
+  jumpStrength: 1.5
   gravity: -0.03
   friction: 0.1
   collisionDistance: 0.3
