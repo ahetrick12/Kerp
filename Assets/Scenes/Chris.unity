@@ -180,7 +180,7 @@ MonoBehaviour:
   exitFlightCooldown: 0.5
   flightSpeed: 0.08
   drag: 0.5
-  flightColDistance: 3
+  collisionDistance: 2
 --- !u!1 &594179061
 GameObject:
   m_ObjectHideFlags: 0
