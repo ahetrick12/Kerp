@@ -137,13 +137,19 @@ MonoBehaviour:
   runSpeed: 1.6
   runFOVOffset: 10
   jumpStrength: 1.5
-  gravity: -0.04
+  gravity: -0.02
   friction: 0.1
   collisionDistance: 0.3
   flightStartBoost: 1
   exitFlightCooldown: 0.5
   flightSpeed: 5
   drag: 0.5
+  health: 4
+  healthIncreaseCooldown: 0
+  healthHUD1: {fileID: 0}
+  healthHUD2: {fileID: 0}
+  healthHUD3: {fileID: 0}
+  clear: {fileID: 0}
 --- !u!114 &33513395
 MonoBehaviour:
   m_ObjectHideFlags: 0

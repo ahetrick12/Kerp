@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Turret : MonoBehaviour
 {
+    public GameObject canvas;
     public GameObject bullet;
     private GameObject rotatingPart;
     private GameObject spotlight;
@@ -159,11 +160,11 @@ public class Turret : MonoBehaviour
 
         if(hasDetected)
         {
-            GameObject.Find("Canvas").transform.Find("Crosshair").GetComponent<RawImage>().texture = redCrosshair;
+            canvas.transform.Find("Crosshair").GetComponent<RawImage>().texture = redCrosshair;
         }
         else
         {
-            GameObject.Find("Canvas").transform.Find("Crosshair").GetComponent<RawImage>().texture = normalCrosshair;
+            canvas.transform.Find("Crosshair").GetComponent<RawImage>().texture = normalCrosshair;
         }
 
         //Debug.Log(GameObject.Find("Canvas").transform.Find("Crosshair").GetComponent<RawImage>());
@@ -187,7 +188,7 @@ public class Turret : MonoBehaviour
         // rotate the turrent to face the player
         if (InView())
             rotatingPart.transform.forward = Vector3.SmoothDamp(rotatingPart.transform.forward, 
-                (player.transform.position - rotatingPart.transform.position).normalized,
+                ((player.transform.position - Vector3.up * 0.1f) - rotatingPart.transform.position).normalized,
                 ref lockSmoothTime,
                 turretLockOnTime);
 
@@ -198,8 +199,8 @@ public class Turret : MonoBehaviour
 
             for(int i = 0; i < shots; i++)
             {
-                Vector3 aimingVector = player.position + Random.insideUnitSphere * maxShotRadius;
-                Bullet lastBullet = Instantiate(bullet, this.transform.position, this.transform.rotation).GetComponent<Bullet>();
+                Vector3 aimingVector = (player.position - Vector3.up * 0.1f) + Random.insideUnitSphere * maxShotRadius;
+                Bullet lastBullet = Instantiate(bullet, this.transform.position, Quaternion.Euler(this.transform.eulerAngles + bullet.transform.eulerAngles)).GetComponent<Bullet>();
                 lastBullet.direction = (aimingVector - this.transform.position).normalized;
 
                 if(barrels.Length > 0)
