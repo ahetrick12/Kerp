@@ -16,9 +16,9 @@ public class Interactable : MonoBehaviour
         
     }
 
-    public void onHover(Transform cam)
-    {
-        promptText.gameObject.SetActive(true);
-        promptText.rotation = cam.rotation;
-    }
+    // public void onHover(Transform cam)
+    // {
+    //     promptText.gameObject.SetActive(true);
+    //     promptText.rotation = cam.rotation;
+    // }
 }
