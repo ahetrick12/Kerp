@@ -414,7 +414,7 @@ MonoBehaviour:
   easyLevelNames:
   - EasyLevel
   mediumLevelNames:
-  - EasyLevel
+  - MediumLevel
   hardLevelNames:
   - EasyLevel
   hubSceneName: Alex
