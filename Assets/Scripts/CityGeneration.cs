@@ -43,17 +43,20 @@ public class CityGeneration : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        // Persist between scenes
-        if (instance != null && instance != this)
+        if (!mainMenu)
         {
-            Destroy(this.gameObject);
-            return;
-        } 
+            // Persist between scenes
+            if (instance != null && instance != this)
+            {
+                Destroy(this.gameObject);
+                return;
+            } 
 
-        instance = this;
-        DontDestroyOnLoad(gameObject);
+            instance = this;
+            DontDestroyOnLoad(gameObject);
 
-        SceneManager.sceneLoaded += OnSceneLoaded;
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
 
         // Actual logic
         Vector2 middle = new Vector2((int)(cityDimensions.x / 2), (int)(cityDimensions.y / 2));

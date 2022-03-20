@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -25,6 +26,8 @@ public class GameManager : MonoBehaviour
 
         instance = this;
         DontDestroyOnLoad(gameObject);
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     void Start()
@@ -45,25 +48,31 @@ public class GameManager : MonoBehaviour
         while (elapsedTime < fadeoutTime)
         {
             Color col = fadeoutPanel.color;
-            col.a = Mathf.Lerp(0, 255, (elapsedTime / fadeoutTime));
+            col.a = Mathf.Lerp(0, 1, (elapsedTime / fadeoutTime));
             fadeoutPanel.color = col;
             
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
+        print("UO");
         yield return new WaitForSeconds(1);
-        levelManager.ReturnToCity();
+        levelManager.ReturnToCity(false);
 
         elapsedTime = 0;
         while (elapsedTime < fadeoutTime)
         {
             Color col = fadeoutPanel.color;
-            col.a = Mathf.Lerp(255, 0, (elapsedTime / fadeoutTime));
+            col.a = Mathf.Lerp(1, 0, (elapsedTime / fadeoutTime));
             fadeoutPanel.color = col;
-            elapsedTime += Time.deltaTime;
 
+            elapsedTime += Time.deltaTime;
             yield return null;
         }
+    }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        canvas = GameObject.Find("Main Canvas");
+        fadeoutPanel = canvas.transform.Find("Fadeout").GetComponent<Image>();
     }
 }

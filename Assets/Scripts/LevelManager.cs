@@ -62,10 +62,15 @@ public class LevelManager : MonoBehaviour
         }            
     }
 
-    public void ReturnToCity()
+    public void ReturnToCity(bool isAlive)
     {
         SceneManager.LoadScene("Alex");
         inLevel = false;
+        if (!isAlive)
+        {
+            kerpCount = lastKerpAmount;
+        }
+        
         if (kerpCount > lastKerpAmount)
         {
             lastDoor.GetComponent<Interactable>().clicked = true;

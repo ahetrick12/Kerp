@@ -316,8 +316,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b00c76529a700bd42bb5eb2d4a58ee51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 1376901249}
-  fadeoutTime: 1
+  canvas: {fileID: 0}
+  fadeoutTime: 3
 --- !u!4 &795895445
 Transform:
   m_ObjectHideFlags: 0
@@ -460,7 +460,7 @@ MonoBehaviour:
   easyLevelNames:
   - EasyLevel
   mediumLevelNames:
-  - MediumLevel
+  - EasyLevel
   hardLevelNames:
   - EasyLevel
   hubSceneName: Alex
@@ -478,11 +478,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1376901249 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8820164756369200864, guid: 7f0a1bdafe99db74cb1754e309d55f87, type: 3}
-  m_PrefabInstance: {fileID: 8820164756564741898}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1608684869 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2976297447019605042, guid: 7f0a1bdafe99db74cb1754e309d55f87, type: 3}
