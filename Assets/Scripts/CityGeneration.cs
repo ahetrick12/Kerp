@@ -40,6 +40,9 @@ public class CityGeneration : MonoBehaviour
 
     private bool assignHubFlag = false;
 
+    [HideInInspector]
+    public Transform hubPoint;
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -120,7 +123,7 @@ public class CityGeneration : MonoBehaviour
         List<Transform> viablePoints = new List<Transform>(spawnpoints);
 
         // Hub door creation
-        Transform hubPoint = Instantiate(doorPrefab).transform;
+        hubPoint = Instantiate(doorPrefab).transform;
         Transform hubDoorSpawnpoint = hubBlock.GetChild(Random.Range(0, hubBlock.childCount));
         hubPoint.position = hubDoorSpawnpoint.position;
         hubPoint.parent = hubDoorSpawnpoint;

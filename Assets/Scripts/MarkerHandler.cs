@@ -33,7 +33,6 @@ public class MarkerHandler : MonoBehaviour
         for(int i = 0; i < levelDoors.Count; i++)
         {
             GameObject marker = Instantiate(markerPrefab, transform.position, Quaternion.identity, transform);
-            marker.transform.name = i.ToString();
             markers.Add(marker.GetComponent<RectTransform>());
         }
     }
@@ -70,7 +69,12 @@ public class MarkerHandler : MonoBehaviour
 
             if (levelDoors.Count == 0)
             {
+                if (hubMarker == null)
+                {
+                    hubMarker = Instantiate(markerPrefab, transform.position, Quaternion.identity, transform).transform;
+                }
 
+                hubMarker.position = cam.WorldToScreenPoint(FindObjectOfType<CityGeneration>().hubPoint.position + Vector3.up * .5f);
             }
         }
         catch {}

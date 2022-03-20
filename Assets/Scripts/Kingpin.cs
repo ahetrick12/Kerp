@@ -81,7 +81,7 @@ public class Kingpin : MonoBehaviour
                 dialogueIndex = 0;
             }
         }
-        else if(LevelManager.kerpCount < 3)
+        else if(LevelManager.kerpCount < 1)
         {
             if(dialogueIndex  < dialogue2.Length)
             {
@@ -94,7 +94,7 @@ public class Kingpin : MonoBehaviour
                 dialogueIndex = 0;
             }
         }
-        else if(LevelManager.kerpCount == 3)
+        else if(LevelManager.kerpCount == 1)
         {
             if(dialogueIndex  < dialogue3.Length)
             {
