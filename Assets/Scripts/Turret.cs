@@ -10,7 +10,9 @@ public class Turret : MonoBehaviour
     public GameObject bullet;
     private GameObject rotatingPart;
     private GameObject spotlight;
-    public float detectionRadius;
+    public float detectionRange;
+    [Range(0,90)]
+    public float detectionAngle;
     public GameObject[] barrels;
     private int shotsTaken;
 
@@ -23,7 +25,6 @@ public class Turret : MonoBehaviour
     public float shots;
     private float detectedTime;
     //public float snapAngle;
-    public float spotlightAngle;
 
     public float maxAngle;
     private Vector3 defaultDirection;
@@ -41,6 +42,8 @@ public class Turret : MonoBehaviour
     public Texture redCrosshair;
     public Texture normalCrosshair;
     
+    private Transform player;
+    private Vector3 lockSmoothTime;
 
     //public float maxHitRadius;      // where the bullet will land and hit the player
     //public int numOfShotDirections;   // the divisions of area that the bullet can go around the player
@@ -55,19 +58,22 @@ public class Turret : MonoBehaviour
 
         // set spotlight size
         spotlight = rotatingPart.transform.Find("Spotlight").gameObject;
-        spotlight.transform.localScale = new Vector3(360 / spotlightAngle, detectionRadius * 2 + 3, 360 / spotlightAngle);
+        //spotlight.transform.localScale = new Vector3(360 / spotlightAngle, detectionRadius * 2 + 3, 360 / spotlightAngle);
+        
 
         // get the bounds for the turret rotation
         rightEdge = Quaternion.AngleAxis(maxAngle, Vector3.up) * defaultDirection;
         leftEdge = Quaternion.AngleAxis(-maxAngle, Vector3.up) * defaultDirection;
         rotatingPart.transform.forward = leftEdge;  // start facing left
 
-        
+        player = FindObjectOfType<PlayerMovement>().transform;
     }
 
     // Update is called once per frame
     void Update()
     {
+        float xzScale = detectionRange * Mathf.Tan(detectionAngle * Mathf.Deg2Rad); 
+        spotlight.transform.localScale = new Vector3(xzScale, detectionRange/2, xzScale);
 
         CheckDetection();     
 
@@ -117,27 +123,18 @@ public class Turret : MonoBehaviour
     {
         // CHECK DETECTION
         RaycastHit hit;
-        if(Physics.Raycast(target.transform.position, this.transform.position - target.transform.position, out hit, detectionRadius))
+        if(Physics.Raycast(player.position, this.transform.position - target.transform.position, out hit, detectionRange))
         {
-
-            // raycast from the player to the turret, if it makes contact with the turret then check conditions...
-            if(hit.transform == this.transform)
+            // raycast from the player to the turret, if it makes contact with the turret head then check conditions...
+            if(hit.transform == this.transform.parent)
             {
-                if(detectionRadius < Vector3.Distance(target.transform.position, this.transform.position))
+                if(InView())
                 {
-                    hasDetected = false;
-                }
-                else if(Vector3.SignedAngle(defaultDirection, target.transform.position - rotatingPart.transform.position, Vector3.up) > maxAngle)
-                {
-                    hasDetected = false;
-                }
-                else if(Vector3.SignedAngle(defaultDirection, target.transform.position - rotatingPart.transform.position, Vector3.up) < -maxAngle)
-                {
-                    hasDetected = false;
+                    hasDetected = true;
                 }
                 else
                 {
-                    hasDetected = true;
+                    hasDetected = false;
                 }
 
                 // if it jsut went from not detecting to detecting...
@@ -148,14 +145,14 @@ public class Turret : MonoBehaviour
                     
                     detectedTime = Time.time;
 
-                }
-                           
+                }                
             }
             else
             {
                 hasDetected = false;
             }
         }
+
         
         lastDetection = hasDetected;
 
@@ -169,38 +166,33 @@ public class Turret : MonoBehaviour
         }
 
         //Debug.Log(GameObject.Find("Canvas").transform.Find("Crosshair").GetComponent<RawImage>());
+
+
+        lastDetection = hasDetected;
+
     }
 
     public void TryToShoot()
     {
-        // orient
-
-        Vector3 turretOrientation;
-        bool outOfFOV = false;
-
-        // check if the palyer is in the turret's field of view and adjust the turret's angle accordingly
-        if(Vector3.SignedAngle(defaultDirection, target.transform.position - rotatingPart.transform.position, Vector3.up) > maxAngle)
+        
+        //check if the palyer is in the turret's field of view and adjust the turret's angle accordingly
+        float angle = Vector3.SignedAngle(defaultDirection, target.transform.position - rotatingPart.transform.position, Vector3.up);
+        if(Mathf.Abs(angle) > maxAngle + detectionAngle)
         {
-            turretOrientation = rightEdge;
-            outOfFOV = true;
-        }
-        else if(Vector3.SignedAngle(defaultDirection, target.transform.position - rotatingPart.transform.position, Vector3.up) < -maxAngle)
-        {
-            turretOrientation = leftEdge;
-            outOfFOV = true;
-        }
-        else
-        {
-            turretOrientation = new Vector3((target.transform.position - rotatingPart.transform.position).x, 0f, (target.transform.position - rotatingPart.transform.position).z);
+            // Out of FOV
+            return;
         }
 
         // rotate the turrent to face the player
-        rotatingPart.transform.forward = Vector3.Lerp(rotatingPart.transform.forward, turretOrientation, (Time.time - detectedTime) / turretLockOnTime);
+        if (InView())
+            rotatingPart.transform.forward = Vector3.SmoothDamp(rotatingPart.transform.forward, 
+                (player.transform.position - rotatingPart.transform.position).normalized,
+                ref lockSmoothTime,
+                turretLockOnTime);
 
-        //Debug.Log($"Turret lock on: {(((Time.time - detectedTime) / turretLockOnTime) * 100f):F2}%");
 
         // shoot
-        if(lastShot + shootCooldown < Time.time && hasDetected && !outOfFOV)
+        if(lastShot + shootCooldown < Time.time && hasDetected)
         { 
 
             for(int i = 0; i < shots; i++)
@@ -219,5 +211,13 @@ public class Turret : MonoBehaviour
 
             lastShot = Time.time;
         }
+
+        lastRotate = Time.time;
+    }
+
+    private bool InView()
+    {
+        float angle = Vector3.SignedAngle(transform.forward, player.position - transform.position, Vector3.up);
+        return (Vector3.Distance(transform.position, player.position) < detectionRange && Mathf.Abs(angle) < detectionAngle);
     }
 }
