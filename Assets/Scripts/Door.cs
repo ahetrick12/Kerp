@@ -29,7 +29,7 @@ public class Door : MonoBehaviour
     {
         if (returnToHubOverride)
         {
-            levelManager.ReturnToCity();
+            levelManager.ReturnToCity(true);
         }
         else
         {
