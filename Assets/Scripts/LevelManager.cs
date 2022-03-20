@@ -7,6 +7,8 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
     public static bool inLevel = false;
+    public static int kerpCount = 0;
+
 
     public enum LevelType {Easy, Medium, Hard};
 
@@ -16,7 +18,9 @@ public class LevelManager : MonoBehaviour
     private Transform player;
     private Vector3 lastPos;
     private Quaternion lastRot;
-
+    private Transform lastDoor;
+    private int lastKerpAmount;
+    
     void Awake()
     {
         if (instance != null && instance != this)
@@ -36,13 +40,14 @@ public class LevelManager : MonoBehaviour
         player = FindObjectOfType<PlayerMovement>().transform;
     }
 
-    public void EnterLevel(LevelType type)
+    public void EnterLevel(LevelType type, Transform door)
     {
         inLevel = true;
         lastPos = player.position;
         lastRot = player.GetChild(0).rotation;
+        lastDoor = door;
+        lastKerpAmount = kerpCount;
 
-        print ("Entered a level of type " + type);
         switch (type)
         {
             case LevelType.Easy: 
@@ -57,16 +62,25 @@ public class LevelManager : MonoBehaviour
         }            
     }
 
-    public void ReturnToHub()
+    public void ReturnToCity()
     {
         SceneManager.LoadScene("Alex");
         inLevel = false;
+        if (kerpCount > lastKerpAmount)
+        {
+            lastDoor.GetComponent<Interactable>().clicked = true;
+        }
     }
 
     public void SetLastPosRot(Vector3 pos, Quaternion rot)
     {
         lastPos = pos;
         lastRot = rot;
+    }
+
+    public void IncrementKerpCount()
+    {
+        kerpCount++;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)

@@ -301,7 +301,6 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit hit;
         if(Physics.Raycast(this.transform.position, velocity, out hit, collisionDistance))
         {
-            Debug.Log("Colliding in flight");
             isFlying = false;
         }
     }

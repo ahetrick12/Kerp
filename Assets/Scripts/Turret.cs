@@ -55,8 +55,8 @@ public class Turret : MonoBehaviour
         rotatingPart = transform.parent.gameObject;         // rotating part is the parent (turret head)
         defaultDirection = rotatingPart.transform.forward;  // set the base direction to whatever it was in the editor
 
-        //spotlight = rotatingPart.transform.Find("Spotlight").gameObject;
-        spotlight = transform.parent.GetComponentInChildren<Light>().gameObject;
+        spotlight = rotatingPart.transform.Find("Spotlight").gameObject;
+        //spotlight = transform.parent.GetComponentInChildren<Light>().gameObject;
 
         // get the bounds for the turret rotation
         rightEdge = Quaternion.AngleAxis(maxAngle, Vector3.up) * defaultDirection;
@@ -70,9 +70,9 @@ public class Turret : MonoBehaviour
     void Update()
     {
         float xzScale = detectionRange * Mathf.Tan(detectionAngle * Mathf.Deg2Rad); 
-        spotlight.GetComponent<Light>().range = detectionRange;
-        spotlight.GetComponent<Light>().spotAngle = detectionAngle;
+        spotlight.transform.localScale = new Vector3(xzScale, detectionRange, xzScale);
 
+        SpotlightIntersection();
         CheckDetection();     
 
         if(!hasDetected)
@@ -84,6 +84,18 @@ public class Turret : MonoBehaviour
             TryToShoot();
         }
 
+    }
+
+    private void SpotlightIntersection()
+    {
+        RaycastHit hit;
+        if(Physics.SphereCast(spotlight.transform.position, .1f, transform.forward, out hit, detectionRange))
+        {
+            float range = Vector3.Distance(spotlight.transform.position, hit.point) / 2;
+            float percentage = range / detectionRange;
+            float newXZScale = spotlight.transform.localScale.x * percentage;
+            spotlight.transform.localScale = new Vector3(newXZScale, range, newXZScale);
+        }
     }
 
     public void Swivel()
@@ -124,11 +136,12 @@ public class Turret : MonoBehaviour
     {
         // CHECK DETECTION
         RaycastHit hit;
-        if(Physics.Raycast(player.position, (this.transform.position - player.position).normalized, out hit, detectionRange))
+        if(Physics.Raycast(player.position, (spotlight.transform.position - player.position).normalized, out hit, detectionRange))
         {
             // raycast from the player to the turret, if it makes contact with the turret head then check conditions...
             if(hit.transform == this.transform.parent)
             {
+                print("BLASFBALB");
                 if(InView())
                 {
                     hasDetected = true;
@@ -177,7 +190,7 @@ public class Turret : MonoBehaviour
     {
         
         //check if the palyer is in the turret's field of view and adjust the turret's angle accordingly
-        float angle = Vector3.SignedAngle(defaultDirection, player.position - rotatingPart.transform.position, Vector3.up);
+        float angle = Vector3.SignedAngle(defaultDirection, player.position - spotlight.transform.position, Vector3.up);
         if(Mathf.Abs(angle) > maxAngle + detectionAngle)
         {
             // Out of FOV
@@ -218,7 +231,10 @@ public class Turret : MonoBehaviour
 
     private bool InView()
     {
-        float angle = Vector3.SignedAngle(transform.forward, (player.position - transform.position).normalized, Vector3.up);
+        Debug.DrawRay(transform.position, (player.position - transform.position), Color.black, 0.1f);
+        Debug.DrawRay(transform.position, transform.forward, Color.black, 0.1f);
+
+        float angle = Vector3.SignedAngle(transform.forward, (player.position - spotlight.transform.position).normalized, Vector3.up);
         return (Vector3.Distance(transform.position, player.position) < detectionRange && Mathf.Abs(angle) < detectionAngle);
     }
 }
