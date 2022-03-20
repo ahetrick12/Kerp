@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Door : MonoBehaviour
 {
@@ -31,6 +32,10 @@ public class Door : MonoBehaviour
         if (returnToCityOverride)
         {
             levelManager.ReturnToCity(true);
+        }
+        else if(returnToHubOverride)
+        {
+            SceneManager.LoadScene("Hub");
         }
         else
         {
