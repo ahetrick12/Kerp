@@ -190,8 +190,8 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300000, guid: 2597d5ee559300d4ea36ad43a754fa57, type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: aac316271d36d1e4f95e4e3519db7ef5, type: 3}
+    m_HighlightedSprite: {fileID: 21300000, guid: 3ff0f2a1a7539d8499afb96d972ba625, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: 2597d5ee559300d4ea36ad43a754fa57, type: 3}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
@@ -204,7 +204,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 43853511}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1474939841}
+        m_TargetAssemblyTypeName: MainMenuCamera, Assembly-CSharp
+        m_MethodName: ToggleSettings
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &43853511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,7 +237,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: aac316271d36d1e4f95e4e3519db7ef5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2597d5ee559300d4ea36ad43a754fa57, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -381,8 +393,8 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300000, guid: 4287f1b9e6f61a444af1066bbb4588c5, type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: e683346db8391864e91ff80418ffc366, type: 3}
+    m_HighlightedSprite: {fileID: 21300000, guid: e683346db8391864e91ff80418ffc366, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: 4287f1b9e6f61a444af1066bbb4588c5, type: 3}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
@@ -395,7 +407,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 893788654}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1474939841}
+        m_TargetAssemblyTypeName: MainMenuCamera, Assembly-CSharp
+        m_MethodName: PlayGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &893788654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -416,7 +440,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e683346db8391864e91ff80418ffc366, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4287f1b9e6f61a444af1066bbb4588c5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1080,8 +1104,8 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300000, guid: 377f09220d2496c43a54df39a6c5c11e, type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: d3c9619d3b61335439bc8c776abed17c, type: 3}
+    m_HighlightedSprite: {fileID: 21300000, guid: bb50f576ed651b7498db92d6b6151cbf, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: 377f09220d2496c43a54df39a6c5c11e, type: 3}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
@@ -1094,7 +1118,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2112215107}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1474939841}
+        m_TargetAssemblyTypeName: MainMenuCamera, Assembly-CSharp
+        m_MethodName: QuitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2112215107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1115,7 +1151,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d3c9619d3b61335439bc8c776abed17c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 377f09220d2496c43a54df39a6c5c11e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

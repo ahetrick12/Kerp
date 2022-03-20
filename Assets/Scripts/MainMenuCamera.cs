@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenuCamera : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class MainMenuCamera : MonoBehaviour
     private Vector2 lookAtPos;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         transform.position = target.position - Vector3.forward * distanceFromTargetZY.x + Vector3.up * distanceFromTargetZY.y;
     }
@@ -24,5 +25,20 @@ public class MainMenuCamera : MonoBehaviour
         transform.LookAt(lookAtPos);
 
         transform.RotateAround(target.position, Vector3.up, -rotateSpeed * Time.deltaTime);
+    }
+
+    public void PlayGame()
+    {
+        SceneManager.LoadScene("Alex");
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    public void ToggleSettings()
+    {
+
     }
 }
