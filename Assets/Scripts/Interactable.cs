@@ -7,7 +7,7 @@ public class Interactable : MonoBehaviour
     [HideInInspector]
     public bool clicked = false;
 
-    private Transform promptText;   
+    public Transform promptText;   
 
     void Start()
     {
@@ -19,9 +19,9 @@ public class Interactable : MonoBehaviour
         promptText.gameObject.SetActive(false);
     }
 
-    // public void onHover(Transform cam)
-    // {
-    //     promptText.gameObject.SetActive(true);
-    //     promptText.rotation = cam.rotation;
-    // }
+    public void onHover(Transform cam)
+    {
+        promptText.gameObject.SetActive(true);
+        promptText.rotation = cam.rotation;
+    }
 }

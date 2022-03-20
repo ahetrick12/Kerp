@@ -26,6 +26,8 @@ public class Kingpin : MonoBehaviour
     private int dialogueIndex;
 
     public Vector3 dialogueLocation;
+
+    public Text speechBubble;
     
 
     // Start is called before the first frame update
@@ -37,6 +39,21 @@ public class Kingpin : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        speechBubble.transform.rotation = Camera.main.transform.rotation;
+    }
+
+    public void Talk()
+    {
+        if(dialogueIndex + 1 < dialogue.Length)
+        {
+            speechBubble.text = dialogue[dialogueIndex];
+            dialogueIndex++;
+        }
+        else
+        {
+            speechBubble.text = "";
+            //this.GetComponent<Interactable>().promptText.Get = "";
+        }
         
     }
 

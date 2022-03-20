@@ -38,9 +38,19 @@ public class Interactor : MonoBehaviour
                 }
             }
 
-            if(hit.transform.name == "Kingpin" && interact)
+            if(hit.transform.name == "Kingpin")
             {
-                Debug.Log("Getting quest");
+                Interactable kingpin = hit.transform.GetComponent<Interactable>();
+                if (!kingpin.clicked) 
+                {
+                    kingpin.onHover(cam.transform);
+                
+                    if (interact)
+                    {
+                        kingpin.GetComponent<Kingpin>().Talk();
+                        //Debug.Log("talked");
+                    }
+                }
             }
 
             if(hit.transform.tag == "Kerp")
