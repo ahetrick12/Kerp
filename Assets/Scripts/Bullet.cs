@@ -43,7 +43,7 @@ public class Bullet : MonoBehaviour
         if((player.transform.position - this.transform.position).magnitude < distanceToDamage)
         {
             Destroy(this.gameObject);
-            //Debug.Log("Hit player");
+            Debug.Log("Hit player");
         }
     }
 }
