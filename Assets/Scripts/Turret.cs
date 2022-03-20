@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Turret : MonoBehaviour
 {
+    public GameObject canvas;
     public GameObject bullet;
     private GameObject rotatingPart;
     private GameObject spotlight;
@@ -159,11 +160,11 @@ public class Turret : MonoBehaviour
 
         if(hasDetected)
         {
-            GameObject.Find("Canvas").transform.Find("Crosshair").GetComponent<RawImage>().texture = redCrosshair;
+            canvas.transform.Find("Crosshair").GetComponent<RawImage>().texture = redCrosshair;
         }
         else
         {
-            GameObject.Find("Canvas").transform.Find("Crosshair").GetComponent<RawImage>().texture = normalCrosshair;
+            canvas.transform.Find("Crosshair").GetComponent<RawImage>().texture = normalCrosshair;
         }
 
         //Debug.Log(GameObject.Find("Canvas").transform.Find("Crosshair").GetComponent<RawImage>());
