@@ -15,6 +15,8 @@ public class LevelManager : MonoBehaviour
     public string[] easyLevelNames, mediumLevelNames, hardLevelNames;
     public string hubSceneName = "Alex";
 
+    public bool talkedToBigMan = false;
+
     private Transform player;
     private Vector3 lastPos;
     private Quaternion lastRot;
@@ -44,7 +46,7 @@ public class LevelManager : MonoBehaviour
     {
         inLevel = true;
         lastPos = player.position;
-        lastRot = player.GetChild(0).rotation;
+        lastRot = Quaternion.Euler(Vector3.up * -90);
         lastDoor = door;
         lastKerpAmount = kerpCount;
 
@@ -83,13 +85,8 @@ public class LevelManager : MonoBehaviour
         lastRot = rot;
     }
 
-    public void IncrementKerpCount()
-    {
-        kerpCount++;
-    }
-
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
+    {        
         if (!inLevel)
         {
             player = FindObjectOfType<PlayerMovement>().transform;
