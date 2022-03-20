@@ -65,6 +65,7 @@ public class PlayerMovement : MonoBehaviour
     public Texture healthHUD2;
     public Texture healthHUD3;
     public Texture clear;
+    public RawImage bloodHUD;
 
     // Start is called before the first frame update
     void Start()
@@ -127,7 +128,7 @@ public class PlayerMovement : MonoBehaviour
             health = 4;
         }
 
-        RawImage bloodHUD = GameObject.Find("Canvas").transform.Find("Blood Overlay").GetComponent<RawImage>();
+        //RawImage bloodHUD = GameObject.Find("Canvas").transform.Find("Blood Overlay").GetComponent<RawImage>();
 
         if(health == 4)
         {

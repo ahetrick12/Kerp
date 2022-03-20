@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Spawnpoint
   - Door
+  - Kerp
   layers:
   - Default
   - TransparentFX
