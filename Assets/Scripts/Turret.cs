@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class Turret : MonoBehaviour
 {
-    public GameObject target;
-    //public GameObject this;
     public GameObject bullet;
     private GameObject rotatingPart;
     private GameObject spotlight;
@@ -90,7 +88,7 @@ public class Turret : MonoBehaviour
 
     public void Swivel()
     {
-
+        Vector3 target =  rotatingPart.transform.forward;
         if(turningRight)
         {
             // if it's reached the outer bound...
@@ -101,10 +99,11 @@ public class Turret : MonoBehaviour
             }
             else
             {   // else keep turning
-                rotatingPart.transform.forward = Vector3.Lerp(leftEdge.normalized, rightEdge.normalized, ((Time.time - lastRotate) / (timeToRotate)));
+                target = Vector3.Lerp(leftEdge.normalized, rightEdge.normalized, ((Time.time - lastRotate) / (timeToRotate)));
             }
         }
-        else    // ditto ^^
+        
+        if (!turningRight)    // ditto ^^
         {
             if(rotatingPart.transform.forward == leftEdge)
             {
@@ -113,9 +112,11 @@ public class Turret : MonoBehaviour
             }
             else
             {
-                rotatingPart.transform.forward = Vector3.Lerp(rightEdge.normalized, leftEdge.normalized, ((Time.time - lastRotate) / (timeToRotate)));
+                target = Vector3.Lerp(rightEdge.normalized, leftEdge.normalized, ((Time.time - lastRotate) / (timeToRotate)));
             }
         }
+
+        rotatingPart.transform.forward = Vector3.SmoothDamp(rotatingPart.transform.forward, target, ref lockSmoothTime, turretLockOnTime);
    
     }
 
@@ -123,7 +124,7 @@ public class Turret : MonoBehaviour
     {
         // CHECK DETECTION
         RaycastHit hit;
-        if(Physics.Raycast(player.position, this.transform.position - target.transform.position, out hit, detectionRange))
+        if(Physics.Raycast(player.position, (this.transform.position - player.position).normalized, out hit, detectionRange))
         {
             // raycast from the player to the turret, if it makes contact with the turret head then check conditions...
             if(hit.transform == this.transform.parent)
@@ -176,7 +177,7 @@ public class Turret : MonoBehaviour
     {
         
         //check if the palyer is in the turret's field of view and adjust the turret's angle accordingly
-        float angle = Vector3.SignedAngle(defaultDirection, target.transform.position - rotatingPart.transform.position, Vector3.up);
+        float angle = Vector3.SignedAngle(defaultDirection, player.position - rotatingPart.transform.position, Vector3.up);
         if(Mathf.Abs(angle) > maxAngle + detectionAngle)
         {
             // Out of FOV
@@ -197,7 +198,7 @@ public class Turret : MonoBehaviour
 
             for(int i = 0; i < shots; i++)
             {
-                Vector3 aimingVector = target.transform.position + Random.insideUnitSphere * maxShotRadius;
+                Vector3 aimingVector = player.position + Random.insideUnitSphere * maxShotRadius;
                 Bullet lastBullet = Instantiate(bullet, this.transform.position, this.transform.rotation).GetComponent<Bullet>();
                 lastBullet.direction = (aimingVector - this.transform.position).normalized;
 
@@ -217,7 +218,7 @@ public class Turret : MonoBehaviour
 
     private bool InView()
     {
-        float angle = Vector3.SignedAngle(transform.forward, player.position - transform.position, Vector3.up);
+        float angle = Vector3.SignedAngle(transform.forward, (player.position - transform.position).normalized, Vector3.up);
         return (Vector3.Distance(transform.position, player.position) < detectionRange && Mathf.Abs(angle) < detectionAngle);
     }
 }
