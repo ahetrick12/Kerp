@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     
     private float xRot = 0f;
     private float yRot = 0f;
+    private float zRot = 0f;
     private Camera cam;
     private Quaternion startingRot;
 
@@ -66,6 +67,13 @@ public class PlayerMovement : MonoBehaviour
     public Texture healthHUD3;
     public Texture clear;
     public RawImage bloodHUD;
+    public float flinchAngle = 10;
+    public float flinchTime = 0.5f;
+
+    [HideInInspector]
+    public bool isDead = false;
+
+    private float zRotSmoothVel;
 
     // Start is called before the first frame update
     void Start()
@@ -87,14 +95,19 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     { 
-        UpdatePosition();
+        if (!isDead)
+        {
+            UpdatePosition();
 
-        UpdateHealth();
+            UpdateHealth();
+        }
+
     }
 
     void LateUpdate()
     {
-        UpdateLookRotation();
+        if (!isDead)
+            UpdateLookRotation();
     }
 
     private void UpdatePosition()
@@ -113,6 +126,7 @@ public class PlayerMovement : MonoBehaviour
     {
         lastHealthIncrease = Time.time;
         health--;
+        zRot = flinchAngle;
     }
 
     private void UpdateHealth()
@@ -123,12 +137,7 @@ public class PlayerMovement : MonoBehaviour
             lastHealthIncrease = Time.time;
         }
 
-        if(health > 4)
-        {
-            health = 4;
-        }
-
-        //RawImage bloodHUD = GameObject.Find("Canvas").transform.Find("Blood Overlay").GetComponent<RawImage>();
+        health = Mathf.Clamp(health, 0, 4);
 
         if(health == 4)
         {
@@ -149,7 +158,7 @@ public class PlayerMovement : MonoBehaviour
 
         if(health < 1)
         {
-            Debug.Log("died");
+            isDead = true;
         }
 
     }
@@ -313,8 +322,9 @@ public class PlayerMovement : MonoBehaviour
         yRot += mouseX;
         xRot -= mouseY;
         xRot = Mathf.Clamp(xRot, -90, 90);
+        zRot = Mathf.SmoothDamp(zRot, 0, ref zRotSmoothVel, flinchTime);
 
-        cam.transform.eulerAngles = startingRot.eulerAngles + new Vector3(xRot, yRot, 0.0f);
+        cam.transform.eulerAngles = startingRot.eulerAngles + new Vector3(xRot, yRot, zRot);
     }
 
     public void SetPosition(Vector3 pos)

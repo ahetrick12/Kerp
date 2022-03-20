@@ -141,8 +141,7 @@ public class Turret : MonoBehaviour
             // raycast from the player to the turret, if it makes contact with the turret head then check conditions...
             if(hit.transform == this.transform.parent)
             {
-                print("BLASFBALB");
-                if(InView())
+                if(InView() && !player.GetComponent<PlayerMovement>().isDead)
                 {
                     hasDetected = true;
                 }
