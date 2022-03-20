@@ -14,6 +14,10 @@ public class CityGeneration : MonoBehaviour
         public float chance;
     }
 
+    public bool mainMenu = false;
+
+    [Space(20)]
+
     public GameObject baseplate;
     public Block[] blockPrefabs;
     public GameObject doorPrefab;
@@ -102,7 +106,8 @@ public class CityGeneration : MonoBehaviour
             }
         }
 
-        SpawnDoors();
+        if (!mainMenu)
+            SpawnDoors();  
     }
 
     private void SpawnDoors() {
