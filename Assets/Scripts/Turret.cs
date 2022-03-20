@@ -187,7 +187,7 @@ public class Turret : MonoBehaviour
         // rotate the turrent to face the player
         if (InView())
             rotatingPart.transform.forward = Vector3.SmoothDamp(rotatingPart.transform.forward, 
-                (player.transform.position - rotatingPart.transform.position).normalized,
+                ((player.transform.position - Vector3.up * 0.1f) - rotatingPart.transform.position).normalized,
                 ref lockSmoothTime,
                 turretLockOnTime);
 
@@ -198,8 +198,8 @@ public class Turret : MonoBehaviour
 
             for(int i = 0; i < shots; i++)
             {
-                Vector3 aimingVector = player.position + Random.insideUnitSphere * maxShotRadius;
-                Bullet lastBullet = Instantiate(bullet, this.transform.position, this.transform.rotation).GetComponent<Bullet>();
+                Vector3 aimingVector = (player.position - Vector3.up * 0.1f) + Random.insideUnitSphere * maxShotRadius;
+                Bullet lastBullet = Instantiate(bullet, this.transform.position, Quaternion.Euler(this.transform.eulerAngles + bullet.transform.eulerAngles)).GetComponent<Bullet>();
                 lastBullet.direction = (aimingVector - this.transform.position).normalized;
 
                 if(barrels.Length > 0)
