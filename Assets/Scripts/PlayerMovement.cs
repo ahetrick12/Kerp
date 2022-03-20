@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -53,9 +54,22 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 lastMovement;
     private Vector3 velSmoothTime;
 
+    [Header("Health")]
+
+    // meta
+
+    public int health = 4;
+    public float healthIncreaseCooldown;
+    private float lastHealthIncrease; 
+    public Texture healthHUD1;
+    public Texture healthHUD2;
+    public Texture healthHUD3;
+    public Texture clear;
+
     // Start is called before the first frame update
     void Start()
     {
+        lastHealthIncrease = Time.time;
         cam = Camera.main;
         startingRot = cam.transform.rotation;
         startFOV = cam.fieldOfView;
@@ -73,6 +87,8 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     { 
         UpdatePosition();
+
+        UpdateHealth();
     }
 
     void LateUpdate()
@@ -90,6 +106,51 @@ public class PlayerMovement : MonoBehaviour
         {
             InFlight();
         }
+    }
+
+    public void TakeDamage()
+    {
+        lastHealthIncrease = Time.time;
+        health--;
+    }
+
+    private void UpdateHealth()
+    {
+        if(lastHealthIncrease + healthIncreaseCooldown < Time.time)
+        {
+            health++;
+            lastHealthIncrease = Time.time;
+        }
+
+        if(health > 4)
+        {
+            health = 4;
+        }
+
+        RawImage bloodHUD = GameObject.Find("Canvas").transform.Find("Blood Overlay").GetComponent<RawImage>();
+
+        if(health == 4)
+        {
+            bloodHUD.texture = clear;
+        }
+        else if(health == 3)
+        {
+            bloodHUD.texture = healthHUD1;
+        }
+        else if(health == 2)
+        {
+            bloodHUD.texture = healthHUD2;
+        }
+        else if(health == 1)
+        {
+            bloodHUD.texture = healthHUD3;
+        }
+
+        if(health < 1)
+        {
+            Debug.Log("died");
+        }
+
     }
 
     private void OnGround()

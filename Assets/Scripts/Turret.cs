@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Turret : MonoBehaviour
 {
@@ -36,6 +37,9 @@ public class Turret : MonoBehaviour
     private float lastRotate;
     private bool turningRight = true;
     public float turretLockOnTime;
+
+    public Texture redCrosshair;
+    public Texture normalCrosshair;
     
 
     //public float maxHitRadius;      // where the bullet will land and hit the player
@@ -155,7 +159,16 @@ public class Turret : MonoBehaviour
         
         lastDetection = hasDetected;
 
+        if(hasDetected)
+        {
+            GameObject.Find("Canvas").transform.Find("Crosshair").GetComponent<RawImage>().texture = redCrosshair;
+        }
+        else
+        {
+            GameObject.Find("Canvas").transform.Find("Crosshair").GetComponent<RawImage>().texture = normalCrosshair;
+        }
 
+        //Debug.Log(GameObject.Find("Canvas").transform.Find("Crosshair").GetComponent<RawImage>());
     }
 
     public void TryToShoot()

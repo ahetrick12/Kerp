@@ -35,6 +35,11 @@ public class Interactor : MonoBehaviour
                     door.EnterDoor();
                 }
             }
+
+            if(hit.transform.name == "Kingpin" && interact)
+            {
+                Debug.Log("Getting quest");
+            }
         }
     }
 }
