@@ -10,6 +10,8 @@ public class Interactor : MonoBehaviour
 
     private Camera cam;
 
+    private int kerpAmount = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +41,27 @@ public class Interactor : MonoBehaviour
             if(hit.transform.name == "Kingpin" && interact)
             {
                 Debug.Log("Getting quest");
+            }
+
+            if(hit.transform.tag == "Kerp" && interact)
+            {
+                //Debug.Log("eatin kerp");
+                try
+                {
+                    GameObject kerp = hit.transform.Find("Kerp").gameObject;
+                    if(kerp.activeInHierarchy)
+                    {
+                        //Debug.Log("It's active");
+                        Destroy(kerp);
+                        kerpAmount++;
+                    }
+                }
+                catch
+                {
+                    Debug.Log("aint no kerp boi");
+                }
+
+                
             }
         }
     }
