@@ -29,12 +29,12 @@ public class Interactor : MonoBehaviour
         {
             if (hit.transform.tag == "Door")
             {
-                Door door = hit.transform.GetComponentInParent<Door>(); 
+                Interactable door = hit.transform.GetComponentInParent<Interactable>(); 
                 door.onHover(cam.transform);
 
                 if (interact)
                 {
-                    door.EnterDoor();
+                    door.GetComponent<Door>().EnterDoor();
                 }
             }
 
@@ -43,25 +43,32 @@ public class Interactor : MonoBehaviour
                 Debug.Log("Getting quest");
             }
 
-            if(hit.transform.tag == "Kerp" && interact)
+            if(hit.transform.tag == "Kerp")
             {
-                //Debug.Log("eatin kerp");
-                try
+                Interactable kerpBox = hit.transform.GetComponentInParent<Interactable>();
+                if (!kerpBox.clicked) 
                 {
-                    GameObject kerp = hit.transform.Find("Kerp").gameObject;
-                    if(kerp.activeInHierarchy)
+                    kerpBox.onHover(cam.transform);
+                
+                    if (interact)
                     {
-                        //Debug.Log("It's active");
-                        Destroy(kerp);
-                        kerpAmount++;
+                        try
+                        {
+                            GameObject kerp = hit.transform.parent.Find("Kerp").gameObject;
+                            if(kerp.activeInHierarchy)
+                            {
+                                //Debug.Log("It's active");
+                                Destroy(kerp);
+                                kerpAmount++;
+                                kerpBox.clicked = true;
+                            }
+                        }
+                        catch
+                        {
+                            Debug.Log("aint no kerp boi");
+                        }
                     }
                 }
-                catch
-                {
-                    Debug.Log("aint no kerp boi");
-                }
-
-                
             }
         }
     }

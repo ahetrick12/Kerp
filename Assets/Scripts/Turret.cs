@@ -55,10 +55,8 @@ public class Turret : MonoBehaviour
         rotatingPart = transform.parent.gameObject;         // rotating part is the parent (turret head)
         defaultDirection = rotatingPart.transform.forward;  // set the base direction to whatever it was in the editor
 
-        // set spotlight size
-        spotlight = rotatingPart.transform.Find("Spotlight").gameObject;
-        //spotlight.transform.localScale = new Vector3(360 / spotlightAngle, detectionRadius * 2 + 3, 360 / spotlightAngle);
-        
+        //spotlight = rotatingPart.transform.Find("Spotlight").gameObject;
+        spotlight = transform.parent.GetComponentInChildren<Light>().gameObject;
 
         // get the bounds for the turret rotation
         rightEdge = Quaternion.AngleAxis(maxAngle, Vector3.up) * defaultDirection;
@@ -72,7 +70,8 @@ public class Turret : MonoBehaviour
     void Update()
     {
         float xzScale = detectionRange * Mathf.Tan(detectionAngle * Mathf.Deg2Rad); 
-        spotlight.transform.localScale = new Vector3(xzScale, detectionRange/2, xzScale);
+        spotlight.GetComponent<Light>().range = detectionRange;
+        spotlight.GetComponent<Light>().spotAngle = detectionAngle;
 
         CheckDetection();     
 

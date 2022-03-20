@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [HideInInspector]
+    public bool clicked = false;
+
+    private Transform promptText;   
+
     void Start()
     {
-        
+        promptText = transform.Find("Canvas").Find("Prompt");
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        promptText.gameObject.SetActive(false);
     }
 
     // public void onHover(Transform cam)

@@ -145,11 +145,12 @@ MonoBehaviour:
   flightSpeed: 5
   drag: 0.5
   health: 4
-  healthIncreaseCooldown: 0
-  healthHUD1: {fileID: 0}
-  healthHUD2: {fileID: 0}
-  healthHUD3: {fileID: 0}
-  clear: {fileID: 0}
+  healthIncreaseCooldown: 1.75
+  healthHUD1: {fileID: 2800000, guid: 8169b1d41da948c4abcc74ae90ba2f3c, type: 3}
+  healthHUD2: {fileID: 2800000, guid: 588f9224e9579c14eac9d2f5b2ec018b, type: 3}
+  healthHUD3: {fileID: 2800000, guid: 0aa3f495d07b53b458955cf0b5abe0d0, type: 3}
+  clear: {fileID: 2800000, guid: 9c3c8909ea75e3e4ba595ac094b031f3, type: 3}
+  bloodHUD: {fileID: 0}
 --- !u!114 &33513395
 MonoBehaviour:
   m_ObjectHideFlags: 0
