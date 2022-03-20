@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
+    public bool returnToCityOverride = false;
     public bool returnToHubOverride = false;
     public LevelManager.LevelType levelType;
 
@@ -27,7 +28,7 @@ public class Door : MonoBehaviour
 
     public void EnterDoor()
     {
-        if (returnToHubOverride)
+        if (returnToCityOverride)
         {
             levelManager.ReturnToCity(true);
         }

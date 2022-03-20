@@ -192,7 +192,7 @@ MonoBehaviour:
   blockSize: 10
   cityDimensions: {x: 10, y: 10}
   maxRowOffset: 5
-  levelCount: 5
+  levelCount: 3
   minLevelSpawnDistance: 10
 --- !u!1 &762230068
 GameObject:
@@ -460,9 +460,9 @@ MonoBehaviour:
   easyLevelNames:
   - EasyLevel
   mediumLevelNames:
-  - EasyLevel
+  - MediumLevel
   hardLevelNames:
-  - EasyLevel
+  - HardLevel
   hubSceneName: Alex
 --- !u!4 &1343226113
 Transform:
@@ -561,21 +561,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 263679821929582837, guid: 7f0a1bdafe99db74cb1754e309d55f87, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.000030517578
-      objectReference: {fileID: 0}
-    - target: {fileID: 8229769353503752084, guid: 7f0a1bdafe99db74cb1754e309d55f87, type: 3}
-      propertyPath: m_Color.a
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8820164756369200864, guid: 7f0a1bdafe99db74cb1754e309d55f87, type: 3}
       propertyPath: m_Name
       value: Main Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 8820164756369200865, guid: 7f0a1bdafe99db74cb1754e309d55f87, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8820164756369200869, guid: 7f0a1bdafe99db74cb1754e309d55f87, type: 3}
       propertyPath: m_Pivot.x

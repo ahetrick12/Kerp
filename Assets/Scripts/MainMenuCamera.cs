@@ -5,16 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuCamera : MonoBehaviour
 {
-    public Transform target;
     public Vector3 targetLookOffset;
     public Vector2 distanceFromTargetZY = new Vector2(50, 10);
     public float rotateSpeed = 1;
 
+    private Transform target;
     private Vector2 lookAtPos;
 
     // Start is called before the first frame update
     void Awake()
     {
+        target = FindObjectOfType<CityGeneration>().transform;
         transform.position = target.position - Vector3.forward * distanceFromTargetZY.x + Vector3.up * distanceFromTargetZY.y;
     }
 
@@ -29,7 +30,7 @@ public class MainMenuCamera : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene("Alex");
+        SceneManager.LoadScene("Hub");
     }
 
     public void QuitGame()

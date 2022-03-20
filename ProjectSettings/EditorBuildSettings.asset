@@ -6,15 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Levels/MediumLevel.unity
-    guid: 81d7c7219e0218549880eaf176331a4f
+    path: Assets/Scenes/MainMenu.unity
+    guid: e030b5683e3af1b4d93d16cb49cf3188
+  - enabled: 1
+    path: Assets/Scenes/Hub.unity
+    guid: 644162806ffb7b64fbcc6df0d8e50ab3
+  - enabled: 1
+    path: Assets/Scenes/Alex.unity
+    guid: 0bc46ae1fcb4ea0478f74492f0eff599
   - enabled: 1
     path: Assets/Scenes/Levels/EasyLevel.unity
     guid: 57679ff34aae5ef48a17e884ac826877
   - enabled: 1
+    path: Assets/Scenes/Levels/MediumLevel.unity
+    guid: 81d7c7219e0218549880eaf176331a4f
+  - enabled: 1
     path: Assets/Scenes/Levels/HardLevel.unity
     guid: 2411a1b7e7794b84ca58b49fc147579b
-  - enabled: 1
-    path: Assets/Scenes/Alex.unity
-    guid: 0bc46ae1fcb4ea0478f74492f0eff599
   m_configObjects: {}

@@ -43,7 +43,7 @@ public class CityGeneration : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        if (!mainMenu)
+        if (!mainMenu || instance != null)
         {
             // Persist between scenes
             if (instance != null && instance != this)
@@ -110,7 +110,9 @@ public class CityGeneration : MonoBehaviour
         }
 
         if (!mainMenu)
+        {
             SpawnDoors();  
+        }
     }
 
     private void SpawnDoors() {
@@ -153,7 +155,20 @@ public class CityGeneration : MonoBehaviour
             Transform door = Instantiate(doorPrefab).transform;
             door.position = finalPoints[i].position;
             door.parent = finalPoints[i];
-            door.GetComponentInChildren<Door>().levelType = (LevelManager.LevelType)Random.Range(0, System.Enum.GetValues(typeof(LevelManager.LevelType)).Length);
+            //door.GetComponentInChildren<Door>().levelType = (LevelManager.LevelType)Random.Range(0, System.Enum.GetValues(typeof(LevelManager.LevelType)).Length);
+            switch (i)
+            {
+                case 0:
+                    door.GetComponentInChildren<Door>().levelType = LevelManager.LevelType.Easy;
+                    break;
+                case 1:
+                    door.GetComponentInChildren<Door>().levelType = LevelManager.LevelType.Medium;
+                    break;
+                case 2:
+                    door.GetComponentInChildren<Door>().levelType = LevelManager.LevelType.Hard;
+                    break;
+            }
+            
             levelDoors.Add(door);
         }
     }
@@ -164,6 +179,8 @@ public class CityGeneration : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        //gameObject.SetActive(SceneManager.GetActiveScene().name == "MainMenu" ? false : true);
+
         transform.GetChild(0).gameObject.SetActive(LevelManager.inLevel ? false : true);
     }
 }

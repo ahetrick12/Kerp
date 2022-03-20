@@ -307,7 +307,7 @@ MonoBehaviour:
     chance: 0.2
   doorPrefab: {fileID: 770738202874058391, guid: 2f398f724f02fec41b6beb58cf41a34c, type: 3}
   blockSize: 10
-  cityDimensions: {x: 15, y: 15}
+  cityDimensions: {x: 10, y: 10}
   maxRowOffset: 5
   levelCount: 5
   minLevelSpawnDistance: 10
@@ -659,10 +659,10 @@ RectTransform:
   m_Father: {fileID: 1361078537}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -119, y: 4}
-  m_SizeDelta: {x: 412.33334, y: 350.33334}
+  m_SizeDelta: {x: 312.33334, y: 250.33334}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1464780516
 MonoBehaviour:
@@ -797,9 +797,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 092e6b80d883dc04ba6d87ddfe008ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 706997269}
-  targetLookOffset: {x: 0, y: 5, z: 0}
-  distanceFromTargetZY: {x: 60, y: 30}
+  targetLookOffset: {x: 0, y: 3, z: 0}
+  distanceFromTargetZY: {x: 45, y: 25}
   rotateSpeed: 2
 --- !u!114 &1474939842
 MonoBehaviour:

@@ -42,27 +42,31 @@ public class MarkerHandler : MonoBehaviour
     {
         if (LevelManager.inLevel) return;
 
-        for (int i = 0; i < levelDoors.Count; i++)
+        try
         {
-            if(levelDoors[i].GetComponentInChildren<Interactable>().clicked)
+            for (int i = 0; i < levelDoors.Count; i++)
             {
-                levelDoors.Remove(levelDoors[i]);
+                if(levelDoors[i].GetComponentInChildren<Interactable>().clicked)
+                {
+                    levelDoors.Remove(levelDoors[i]);
 
-                Destroy(markers[i].gameObject);
-                markers.RemoveAt(i);
-                continue;
-            }
+                    Destroy(markers[i].gameObject);
+                    markers.RemoveAt(i);
+                    continue;
+                }
 
-            if (levelDoors[i].GetComponentInChildren<Renderer>().isVisible)
-            {
-                markers[i].gameObject.SetActive(true);
-                
-                markers[i].position = cam.WorldToScreenPoint(levelDoors[i].position + Vector3.up * .5f);
-            }
-            else
-            {
-                markers[i].gameObject.SetActive(false);
+                if (levelDoors[i].GetComponentInChildren<Renderer>().isVisible)
+                {
+                    markers[i].gameObject.SetActive(true);
+                    
+                    markers[i].position = cam.WorldToScreenPoint(levelDoors[i].position + Vector3.up * .5f);
+                }
+                else
+                {
+                    markers[i].gameObject.SetActive(false);
+                }
             }
         }
+        catch {}
     }
 }

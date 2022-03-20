@@ -103,13 +103,12 @@ public class PlayerMovement : MonoBehaviour
             UpdateHealth();
         }
 
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-            SceneManager.LoadScene("MainMenu");
-        }
-
+        // if(Input.GetKeyDown(KeyCode.Escape))
+        // {
+        //     Cursor.visible = true;
+        //     Cursor.lockState = CursorLockMode.None;
+        //     SceneManager.LoadScene("MainMenu");
+        // }
     }
 
     void LateUpdate()

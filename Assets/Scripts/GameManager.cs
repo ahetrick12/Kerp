@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     private float elapsedTime = 0;
 
     private LevelManager levelManager;
+    private CityGeneration cityGen;
+    private Text kerpCount;
 
     void Awake()
     {
@@ -34,7 +36,14 @@ public class GameManager : MonoBehaviour
     {
         fadeoutPanel = canvas.transform.Find("Fadeout").GetComponent<Image>();
         fadeoutPanel.color = new Color(0,0,0,0);
+        
         levelManager = FindObjectOfType<LevelManager>();
+        cityGen = FindObjectOfType<CityGeneration>();
+    }
+
+    void Update()
+    {
+        kerpCount.text = LevelManager.kerpCount + "/" + cityGen.levelCount + " Kerp Collected";
     }
 
     public void BeingDeathSequence()
@@ -74,5 +83,7 @@ public class GameManager : MonoBehaviour
     {
         canvas = GameObject.Find("Main Canvas");
         fadeoutPanel = canvas.transform.Find("Fadeout").GetComponent<Image>();
+        kerpCount = canvas.transform.Find("KerpCount").GetComponent<Text>();
+
     }
 }
