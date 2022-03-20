@@ -116,7 +116,7 @@ public class CityGeneration : MonoBehaviour
         hubPoint.parent = hubDoorSpawnpoint;
 
         Vector3 playerPos = hubPoint.position + Vector3.right * -1f;
-        FindObjectOfType<LevelManager>().SetLastPosRot(playerPos + Vector3.up * 1, Quaternion.LookRotation(Vector3.up * (hubPoint.position - playerPos).magnitude, Vector3.up));
+        FindObjectOfType<LevelManager>().SetLastPosRot(playerPos + Vector3.up * 1, Quaternion.LookRotation(hubPoint.position - playerPos, Vector3.up));
         foreach(Transform point in viablePoints)
         {
             if (point.position == hubPoint.position)
