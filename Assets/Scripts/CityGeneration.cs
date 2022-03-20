@@ -124,6 +124,7 @@ public class CityGeneration : MonoBehaviour
         Transform hubDoorSpawnpoint = hubBlock.GetChild(Random.Range(0, hubBlock.childCount));
         hubPoint.position = hubDoorSpawnpoint.position;
         hubPoint.parent = hubDoorSpawnpoint;
+        hubPoint.GetComponentInChildren<Door>().returnToHubOverride = true;
 
         Vector3 playerPos = hubPoint.position + Vector3.right * -1f;
         FindObjectOfType<LevelManager>().SetLastPosRot(playerPos + Vector3.up * 1, Quaternion.LookRotation(hubPoint.position - playerPos, Vector3.up));
