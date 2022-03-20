@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CityGeneration : MonoBehaviour
 {
+    public static CityGeneration instance;
+
     [System.Serializable]
     public struct Block {
         public GameObject prefab;
@@ -36,6 +39,19 @@ public class CityGeneration : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
+        // Persist between scenes
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        } 
+
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
+        // Actual logic
         Vector2 middle = new Vector2((int)(cityDimensions.x / 2), (int)(cityDimensions.y / 2));
 
         for (int i = 0; i < cityDimensions.x; i++)
@@ -47,7 +63,7 @@ public class CityGeneration : MonoBehaviour
                 float xPos = (i - middle.x) * blockSize;
                 float zPos = (j - middle.y) * blockSize + placementOffset;
                 
-                GameObject bp = Instantiate(baseplate, new Vector3(xPos, 0, zPos), Quaternion.Euler(Vector3.right * -90), transform);
+                GameObject bp = Instantiate(baseplate, new Vector3(xPos, 0, zPos), Quaternion.Euler(Vector3.right * -90), transform.GetChild(0));
                 
                 int index;
                 float chance, threshold;
@@ -62,7 +78,7 @@ public class CityGeneration : MonoBehaviour
 
                 block.position = new Vector3(xPos, 0, zPos);
                 block.eulerAngles = new Vector3(-90, 0, 90 * Random.Range(0, 3));
-                block.parent = transform;
+                block.parent = bp.transform;
                 
                 // Add each spawnpoint to the list
                 foreach(Transform tr in block)
@@ -126,12 +142,17 @@ public class CityGeneration : MonoBehaviour
             Transform door = Instantiate(doorPrefab).transform;
             door.position = finalPoints[i].position;
             door.parent = finalPoints[i];
-            door.GetComponent<Door>().levelType = (LevelManager.LevelType)Random.Range(0, System.Enum.GetValues(typeof(LevelManager.LevelType)).Length);
+            door.GetComponentInChildren<Door>().levelType = (LevelManager.LevelType)Random.Range(0, System.Enum.GetValues(typeof(LevelManager.LevelType)).Length);
             levelDoors[i] = door;
         }
     }
 
     public Transform[] getLevelDoors() {
         return levelDoors;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        transform.GetChild(0).gameObject.SetActive(LevelManager.inLevel ? false : true);
     }
 }

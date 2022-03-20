@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private float xRot = 0f;
     private float yRot = 0f;
     private Camera cam;
-    private Vector3 startingRot;
+    private Quaternion startingRot;
 
     [Header("Position variables")]
 
@@ -24,10 +24,12 @@ public class PlayerMovement : MonoBehaviour
     public float walkSpeed;
     public float crouchSpeed;
     public float runSpeed;
+    public float runFOVOffset = 10;
 
     private float speed;
     private float speedSmoothVel;
     private float heightSmoothVel;
+    private float startFOV, fovSmoothTime;
 
     [Space(10)]
 
@@ -35,7 +37,6 @@ public class PlayerMovement : MonoBehaviour
     public float gravity;
     public float friction;
     public float collisionDistance;
-
 
     [Header("Flight variables")]
 
@@ -56,6 +57,9 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         cam = Camera.main;
+        startingRot = cam.transform.rotation;
+        startFOV = cam.fieldOfView;
+
         height = standHeight;
 
         if (hideCursor)
@@ -106,10 +110,12 @@ public class PlayerMovement : MonoBehaviour
             if(Input.GetKey(KeyCode.LeftShift))
             {
                 speed = Mathf.SmoothDamp(speed, runSpeed, ref speedSmoothVel, 0.1f);
+                cam.fieldOfView = Mathf.SmoothDamp(cam.fieldOfView, startFOV + runFOVOffset, ref fovSmoothTime, 0.15f);
             }
             else
             {
                 speed = Mathf.SmoothDamp(speed, walkSpeed, ref speedSmoothVel, 0.1f);
+                cam.fieldOfView = Mathf.SmoothDamp(cam.fieldOfView, startFOV, ref fovSmoothTime, 0.15f);
             }
 
             // Stand if not crouching
@@ -247,6 +253,6 @@ public class PlayerMovement : MonoBehaviour
         xRot -= mouseY;
         xRot = Mathf.Clamp(xRot, -90, 90);
 
-        cam.transform.eulerAngles = new Vector3(xRot, yRot, 0.0f);
+        cam.transform.eulerAngles = startingRot.eulerAngles + new Vector3(xRot, yRot, 0.0f);
     }
 }
