@@ -63,7 +63,13 @@ public class LevelManager : MonoBehaviour
         inLevel = false;
     }
 
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    public void SetLastPosRot(Vector3 pos, Quaternion rot)
+    {
+        lastPos = pos;
+        lastRot = rot;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (!inLevel)
         {

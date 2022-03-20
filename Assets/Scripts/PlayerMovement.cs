@@ -255,4 +255,9 @@ public class PlayerMovement : MonoBehaviour
 
         cam.transform.eulerAngles = startingRot.eulerAngles + new Vector3(xRot, yRot, 0.0f);
     }
+
+    public void SetPosition(Vector3 pos)
+    {
+        transform.position = pos;
+    }
 }
