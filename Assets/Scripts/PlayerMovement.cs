@@ -167,6 +167,7 @@ public class PlayerMovement : MonoBehaviour
         if(health < 1)
         {
             isDead = true;
+            FindObjectOfType<GameManager>().BeingDeathSequence();
         }
 
     }

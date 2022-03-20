@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37c258ab9f077da498860a79d2dccb57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMenu: 0
   baseplate: {fileID: 6508474945287782815, guid: 9c3476e8a38348a42ae914457c3e4348, type: 3}
   blockPrefabs:
   - prefab: {fileID: 8533756582579848625, guid: 2c0e26c1f6ede7e4eb3af8940b12c4a9, type: 3}
@@ -286,6 +287,51 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &795895443
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 795895445}
+  - component: {fileID: 795895444}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &795895444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 795895443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b00c76529a700bd42bb5eb2d4a58ee51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 1376901249}
+  fadeoutTime: 1
+--- !u!4 &795895445
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 795895443}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 446.92947, y: 379.36288, z: -70.54318}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &903722680
 GameObject:
   m_ObjectHideFlags: 0
@@ -432,6 +478,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1376901249 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8820164756369200864, guid: 7f0a1bdafe99db74cb1754e309d55f87, type: 3}
+  m_PrefabInstance: {fileID: 8820164756564741898}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1608684869 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2976297447019605042, guid: 7f0a1bdafe99db74cb1754e309d55f87, type: 3}
@@ -515,6 +566,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 263679821929582837, guid: 7f0a1bdafe99db74cb1754e309d55f87, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.000030517578
+      objectReference: {fileID: 0}
+    - target: {fileID: 8229769353503752084, guid: 7f0a1bdafe99db74cb1754e309d55f87, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8820164756369200864, guid: 7f0a1bdafe99db74cb1754e309d55f87, type: 3}
       propertyPath: m_Name
       value: Main Canvas
