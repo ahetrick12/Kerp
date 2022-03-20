@@ -17,6 +17,7 @@ public class Turret : MonoBehaviour
     public float maxShotRadius;     // where the bullet will go
     public float firstShotWindup;
     public float shots;
+    private float detectedTime;
 
     public float maxAngle;
     private Vector3 defaultDirection;
@@ -24,6 +25,13 @@ public class Turret : MonoBehaviour
     private Vector3 rightVector;
     //private bool rotatingRight;
     //private bool reachedTheEdge;
+    Vector3 leftEdge;
+    Vector3 rightEdge;
+    public float timeToRotate;
+    private float lastRotate;
+    private bool turningRight = true;
+    public float turretLockOnTime;
+    
 
     private Vector3 startingForward;
 
@@ -35,14 +43,18 @@ public class Turret : MonoBehaviour
     void Start()
     {
         lastShot = Time.time;
-        defaultDirection = this.transform.forward;
         rotatingPart = transform.parent.gameObject;
+        defaultDirection = rotatingPart.transform.forward;
         //rotatingRight = true;
         //eachedTheEdge = false;
+        rightEdge = Quaternion.AngleAxis(maxAngle, Vector3.up) * defaultDirection; //* this.transform.forward;
+        //leftEdge += new Vector3(0, -leftEdge.y, -leftEdge.x);
+        leftEdge = Quaternion.AngleAxis(-maxAngle, Vector3.up) * defaultDirection; //this.transform.forward;
+        rotatingPart.transform.forward = leftEdge;  // start facing left
 
         startingForward = transform.forward;
 
-        Debug.DrawRay(this.transform.position, defaultDirection, Color.black, 10f);
+        //Debug.DrawRay(this.transform.position, defaultDirection, Color.black, 10f);
         
     }
 
@@ -72,81 +84,41 @@ public class Turret : MonoBehaviour
 
     public void Swivel()
     {
-        // if(rotatingRight)
-        // {
-        //     if(!reachedTheEdge)
-        //     {
-        //         rotatingPart.transform.RotateAround(rotatingPart.transform.position, Vector3.up, 20 * Time.deltaTime);
 
-        //         if(rotatingPart.transform.eulerAngles.y > maxAngle)
-        //         {
-        //             reachedTheEdge = true;
-        //         }
-        //     }
-        //     else
-        //     {
-        //         rotatingPart.transform.RotateAround(rotatingPart.transform.position, Vector3.up, -20 * Time.deltaTime);
+        //Debug.DrawRay(this.transform.position, defaultDirection, Color.red, 0.1f);
+        //Debug.DrawRay(rotatingPart.transform.position, leftEdge, Color.yellow, 0.1f);
+        //Debug.DrawRay(rotatingPart.transform.position, rightEdge, Color.green, 0.1f);
 
-        //         if(rotatingPart.transform.eulerAngles.y < 0.1f)
-        //         {
-        //             Debug.Log("Got to the middle");
-        //             rotatingRight = false;
-        //             reachedTheEdge = false;
-        //         }
-        //     }
+        if(turningRight)
+        {
+            if(rotatingPart.transform.forward == rightEdge)
+            {
+                turningRight = false;
+                lastRotate = Time.time;
+            }
+            else
+            {
+                rotatingPart.transform.forward = Vector3.Lerp(leftEdge.normalized, rightEdge.normalized, ((Time.time - lastRotate) / (timeToRotate)));
+            }
+        }
+        else
+        {
+            if(rotatingPart.transform.forward == leftEdge)
+            {
+                turningRight = true;
+                lastRotate = Time.time;
+            }
+            else
+            {
+                rotatingPart.transform.forward = Vector3.Lerp(rightEdge.normalized, leftEdge.normalized, ((Time.time - lastRotate) / (timeToRotate)));
+            }
+        }
 
-            
-        // }
-        // else if(!rotatingRight)
-        // {
-        //     if(!reachedTheEdge)
-        //     {
-        //         Debug.Log("Turning to outside of left");
-        //         rotatingPart.transform.RotateAround(rotatingPart.transform.position, Vector3.up, -20 * Time.deltaTime);
+        //Debug.Log($"Turning: {(((Time.time - lastRotate) / (lastRotate + timeToRotate)) * 100f):F2}%");
+        //Debug.Log("");
 
-        //         if(rotatingPart.transform.eulerAngles.y < 360 - maxAngle)
-        //         {
-        //             Debug.Log("Reached the left edge");
-        //             reachedTheEdge = true;
-        //         }
-        //     }
-        //     else
-        //     {
-        //         rotatingPart.transform.RotateAround(rotatingPart.transform.position, Vector3.up, 20 * Time.deltaTime);
-
-        //         if(rotatingPart.transform.eulerAngles.y > 359.9f)
-        //         {
-        //             rotatingRight = false;
-        //             reachedTheEdge = false;
-        //         }
-        //     }
-        // }
-
-        // float speed = 20;
-        // rotatingPart.transform.RotateAround(rotatingPart.transform.position, Vector3.up, speed * Time.deltaTime);
-        // float angle = Vector3.Angle(startingForward, transform.forward) * Mathf.Sign(speed);
-        // if (Vector3.Angle(startingForward, transform.forward) * Mathf.Sign(speed) > maxAngle)
-        // {
-        //     speed *= -1;
-        // }
-        // print(Mathf.Sign(speed));
-
-        // Debug.DrawRay(this.transform.position, startingForward, Color.black, 0.1f);
-        // Debug.DrawRay(this.transform.position, transform.forward, Color.black, 0.1f);
-
-        //Debug.Log(rotatingPart.transform.eulerAngles.y);
-
-        // SOLUTION
-
-        // Vector3 v = targetPosition - bulletOriginPosition;
-        // Vector3 v2 = Quaternion.AngleAxis(angleVariance, Vector3.forward) * v;
-        // Vector3 v3 = Quaternion.AngleAxis(-angleVariance, Vector3.forward) * v;
         
-        // positions[0] = targetPosition;
-        // positions[1] = bulletOriginPosition + v2;
-        // positions[2] = bulletOriginPosition + v3;
-        
-        Debug.DrawRay(this.transform.position, defaultDirection, Color.black, 0.1f);
+        //Debug.DrawRay(this.transform.position, defaultDirection, Color.black, 0.1f);
         
     }
 
@@ -174,6 +146,7 @@ public class Turret : MonoBehaviour
                 {
                     lastShot = Time.time  + firstShotWindup;
                     
+                    detectedTime = Time.time;
                     //Debug.Log("Dtected for first time");
                 }
                 
@@ -189,6 +162,30 @@ public class Turret : MonoBehaviour
 
     public void TryToShoot()
     {
+        // orient
+
+        Vector3 turretOrient;
+
+        Debug.Log(Vector3.SignedAngle(defaultDirection, target.transform.position - rotatingPart.transform.position, Vector3.up));
+
+        if(Vector3.SignedAngle(defaultDirection, target.transform.position - rotatingPart.transform.position, Vector3.up) > maxAngle)
+        {
+            turretOrient = rightEdge;
+        }
+        else if(Vector3.SignedAngle(defaultDirection, target.transform.position - rotatingPart.transform.position, Vector3.up) < -maxAngle)
+        {
+            turretOrient = leftEdge;
+        }
+        else
+        {
+            turretOrient = new Vector3((target.transform.position - rotatingPart.transform.position).x, 0f, (target.transform.position - rotatingPart.transform.position).z);
+        }
+
+        rotatingPart.transform.forward = Vector3.Lerp(rotatingPart.transform.forward, turretOrient, (Time.time - detectedTime) / turretLockOnTime);
+
+        Debug.Log($"Turret lock on: {(((Time.time - detectedTime) / turretLockOnTime) * 100f):F2}%");
+
+        // shoot
         if(lastShot + shootCooldown < Time.time && hasDetected)
         { 
             //Debug.DrawRay(this.transform.position, aimingVector - this.transform.position, Color.red, 5f);
