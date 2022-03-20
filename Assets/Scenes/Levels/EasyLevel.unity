@@ -1524,6 +1524,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5226962447505472240, guid: 24d6156cdd0a46c48a87138b3e5a16ae, type: 3}
       propertyPath: returnToHubOverride
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5226962447505472240, guid: 24d6156cdd0a46c48a87138b3e5a16ae, type: 3}
+      propertyPath: returnToCityOverride
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1908730117586218778, guid: 24d6156cdd0a46c48a87138b3e5a16ae, type: 3}

@@ -1987,6 +1987,7 @@ MonoBehaviour:
   hardLevelNames:
   - HardLevel
   hubSceneName: Alex
+  talkedToBigMan: 0
 --- !u!4 &1067653031
 Transform:
   m_ObjectHideFlags: 0
@@ -2816,6 +2817,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5226962447505472240, guid: 24d6156cdd0a46c48a87138b3e5a16ae, type: 3}
       propertyPath: returnToHubOverride
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5226962447505472240, guid: 24d6156cdd0a46c48a87138b3e5a16ae, type: 3}
+      propertyPath: returnToCityOverride
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1908730117586218778, guid: 24d6156cdd0a46c48a87138b3e5a16ae, type: 3}

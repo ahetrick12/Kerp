@@ -79,6 +79,12 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public void GoToHub()
+    {
+        inLevel = true;
+        SceneManager.LoadScene("Hub");
+    }
+
     public void SetLastPosRot(Vector3 pos, Quaternion rot)
     {
         lastPos = pos;
