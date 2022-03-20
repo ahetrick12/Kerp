@@ -71,6 +71,10 @@ public class PlayerMovement : MonoBehaviour
     public float flinchAngle = 10;
     public float flinchTime = 0.5f;
 
+    [Header("Audio")]
+
+    public AudioSource jetpack;
+
     [HideInInspector]
     public bool isDead = false;
 
@@ -121,10 +125,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if(!isFlying)
         {
+            jetpack.volume = 0;
             OnGround();            
         }
         else
         {
+            jetpack.volume = 1;
             InFlight();
         }
     }

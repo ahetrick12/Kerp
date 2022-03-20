@@ -142,7 +142,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a3cd22eceea5e8548b10cdb5d9b49a25, type: 2}
+  - {fileID: 2100000, guid: 26cf79ce6f363964b942f8ab61db7692, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -189,6 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9987bab247d3f9040852ca644690acdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  returnToCityOverride: 0
   returnToHubOverride: 0
   levelType: 0
 --- !u!114 &1905701433498236792
@@ -204,6 +205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clicked: 0
+  promptText: {fileID: 0}
 --- !u!1 &7605946746891004480
 GameObject:
   m_ObjectHideFlags: 0

@@ -46,7 +46,7 @@ public class LevelManager : MonoBehaviour
     {
         inLevel = true;
         lastPos = player.position;
-        lastRot = Quaternion.Euler(Vector3.up * -90);
+        lastRot = player.GetChild(0).rotation;
         lastDoor = door;
         lastKerpAmount = kerpCount;
 
@@ -95,6 +95,12 @@ public class LevelManager : MonoBehaviour
     {        
         if (!inLevel)
         {
+            if (lastRot.eulerAngles == Vector3.zero)
+            {
+                lastPos = new Vector3(-0.7f, 0.3f, -0.23f);
+                lastRot = Quaternion.Euler(-3, -90, 0);
+            }
+
             player = FindObjectOfType<PlayerMovement>().transform;
             
             player.position = lastPos;

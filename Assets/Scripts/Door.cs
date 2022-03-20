@@ -31,17 +31,14 @@ public class Door : MonoBehaviour
     {
         if (returnToCityOverride)
         {
-            print("3");
             levelManager.ReturnToCity(true);
         }
         else if(returnToHubOverride)
         {
-            print("2");
             levelManager.GoToHub();
         }
         else
         {
-            print("1");
             levelManager.EnterLevel(levelType, transform);
         }
     }

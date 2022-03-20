@@ -12,6 +12,7 @@ public class MarkerHandler : MonoBehaviour
 
     private CityGeneration cityGen;
     private Camera cam;
+    private Transform hubMarker = null;
 
     void Awake()
     {
@@ -65,6 +66,11 @@ public class MarkerHandler : MonoBehaviour
                 {
                     markers[i].gameObject.SetActive(false);
                 }
+            }
+
+            if (levelDoors.Count == 0)
+            {
+
             }
         }
         catch {}
