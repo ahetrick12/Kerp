@@ -135,8 +135,9 @@ MonoBehaviour:
   walkSpeed: 0.8
   crouchSpeed: 0.3
   runSpeed: 1.6
+  runFOVOffset: 10
   jumpStrength: 1.5
-  gravity: -0.03
+  gravity: -0.04
   friction: 0.1
   collisionDistance: 0.3
   flightStartBoost: 1
