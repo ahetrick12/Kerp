@@ -71,10 +71,25 @@ public class MarkerHandler : MonoBehaviour
             {
                 if (hubMarker == null)
                 {
+                    for (int i = 0; i < markers.Count; i++)
+                    {
+                        markers[i].gameObject.SetActive(false);
+                    }
+
                     hubMarker = Instantiate(markerPrefab, transform.position, Quaternion.identity, transform).transform;
                 }
 
-                hubMarker.position = cam.WorldToScreenPoint(FindObjectOfType<CityGeneration>().hubPoint.position + Vector3.up * .5f);
+                Transform point = FindObjectOfType<CityGeneration>().hubPoint;
+                if (point.GetComponentInChildren<Renderer>().isVisible)
+                {
+                   hubMarker.gameObject.SetActive(true);
+                    
+                    hubMarker.position = cam.WorldToScreenPoint(point.position + Vector3.up * .5f);
+                }
+                else
+                {
+                    hubMarker.gameObject.SetActive(false);
+                }
             }
         }
         catch {}

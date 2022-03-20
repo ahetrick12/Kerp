@@ -2917,12 +2917,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 591857470}
     m_Modifications:
     - target: {fileID: -5226962447505472240, guid: 24d6156cdd0a46c48a87138b3e5a16ae, type: 3}
-      propertyPath: returnToHubOverride
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -5226962447505472240, guid: 24d6156cdd0a46c48a87138b3e5a16ae, type: 3}
       propertyPath: returnToCityOverride
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 809487638, guid: 24d6156cdd0a46c48a87138b3e5a16ae, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1908730117586218778, guid: 24d6156cdd0a46c48a87138b3e5a16ae, type: 3}
       propertyPath: m_Name
@@ -3261,10 +3261,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 8820164756369200865, guid: 7f0a1bdafe99db74cb1754e309d55f87, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8820164756369200869, guid: 7f0a1bdafe99db74cb1754e309d55f87, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -3480,7 +3476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 17110a3a8fe3f2847a2da495279bc98e, type: 2}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}

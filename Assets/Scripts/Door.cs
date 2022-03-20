@@ -29,6 +29,11 @@ public class Door : MonoBehaviour
 
     public void EnterDoor()
     {
+        AudioSource source = GetComponent<AudioSource>(); 
+        source.time = 1f;
+        source.Play();
+    
+
         if (returnToCityOverride)
         {
             levelManager.ReturnToCity(true);
