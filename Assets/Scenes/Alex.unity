@@ -414,9 +414,9 @@ MonoBehaviour:
   easyLevelNames:
   - EasyLevel
   mediumLevelNames:
-  - MediumLevel
+  - EasyLevel
   hardLevelNames:
-  - HardLevel
+  - EasyLevel
   hubSceneName: Alex
 --- !u!4 &1343226113
 Transform:
@@ -432,6 +432,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1608684869 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2976297447019605042, guid: 7f0a1bdafe99db74cb1754e309d55f87, type: 3}
+  m_PrefabInstance: {fileID: 8820164756564741898}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1924373903
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -482,6 +493,14 @@ PrefabInstance:
     - target: {fileID: 2183161114238979424, guid: 1555fd3c5d68a9541872a21c8ec08df4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2183161114238979425, guid: 1555fd3c5d68a9541872a21c8ec08df4, type: 3}
+      propertyPath: bloodHUD
+      value: 
+      objectReference: {fileID: 1608684869}
+    - target: {fileID: 2183161114238979425, guid: 1555fd3c5d68a9541872a21c8ec08df4, type: 3}
+      propertyPath: flightSpeed
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2183161114238979427, guid: 1555fd3c5d68a9541872a21c8ec08df4, type: 3}
       propertyPath: m_Name

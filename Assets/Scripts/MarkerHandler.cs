@@ -7,8 +7,8 @@ public class MarkerHandler : MonoBehaviour
 {
     public GameObject markerPrefab;
 
-    private Transform[] levelDoors;
-    private RectTransform[] markers;
+    private List<Transform> levelDoors;
+    private List<RectTransform> markers;
 
     private CityGeneration cityGen;
     private Camera cam;
@@ -27,12 +27,13 @@ public class MarkerHandler : MonoBehaviour
         if (LevelManager.inLevel) return;
 
         levelDoors = cityGen.getLevelDoors();
-        markers = new RectTransform[levelDoors.Length];
+        markers = new List<RectTransform>();
 
-        for(int i = 0; i < levelDoors.Length; i++)
+        for(int i = 0; i < levelDoors.Count; i++)
         {
             GameObject marker = Instantiate(markerPrefab, transform.position, Quaternion.identity, transform);
-            markers[i] = marker.GetComponent<RectTransform>();
+            marker.transform.name = i.ToString();
+            markers.Add(marker.GetComponent<RectTransform>());
         }
     }
 
@@ -41,20 +42,27 @@ public class MarkerHandler : MonoBehaviour
     {
         if (LevelManager.inLevel) return;
 
-        try
+        for (int i = 0; i < levelDoors.Count; i++)
         {
-            for (int i = 0; i < markers.Length; i++)
+            if(levelDoors[i].GetComponentInChildren<Interactable>().clicked)
             {
-                if (levelDoors[i].GetComponentInChildren<Renderer>().isVisible)
-                {
-                    markers[i].gameObject.SetActive(true);
-                    markers[i].position = cam.WorldToScreenPoint(levelDoors[i].position + Vector3.up * .5f);
-                }
-                else
-                {
-                    markers[i].gameObject.SetActive(false);
-                }
+                levelDoors.Remove(levelDoors[i]);
+
+                Destroy(markers[i].gameObject);
+                markers.RemoveAt(i);
+                continue;
             }
-        } catch {}
+
+            if (levelDoors[i].GetComponentInChildren<Renderer>().isVisible)
+            {
+                markers[i].gameObject.SetActive(true);
+                
+                markers[i].position = cam.WorldToScreenPoint(levelDoors[i].position + Vector3.up * .5f);
+            }
+            else
+            {
+                markers[i].gameObject.SetActive(false);
+            }
+        }
     }
 }

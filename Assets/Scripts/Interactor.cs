@@ -10,8 +10,6 @@ public class Interactor : MonoBehaviour
 
     private Camera cam;
 
-    private int kerpAmount = 0;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -30,11 +28,15 @@ public class Interactor : MonoBehaviour
             if (hit.transform.tag == "Door")
             {
                 Interactable door = hit.transform.GetComponentInParent<Interactable>(); 
-                door.onHover(cam.transform);
-
-                if (interact)
+                
+                if (!door.clicked)
                 {
-                    door.GetComponent<Door>().EnterDoor();
+                    door.onHover(cam.transform);
+
+                    if (interact)
+                    {
+                        door.GetComponent<Door>().EnterDoor();
+                    }
                 }
             }
 
@@ -69,7 +71,7 @@ public class Interactor : MonoBehaviour
                             {
                                 //Debug.Log("It's active");
                                 Destroy(kerp);
-                                kerpAmount++;
+                                LevelManager.kerpCount++;
                                 kerpBox.clicked = true;
                             }
                         }

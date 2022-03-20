@@ -7,7 +7,7 @@ public class Door : MonoBehaviour
     public bool returnToHubOverride = false;
     public LevelManager.LevelType levelType;
 
-    private Transform promptText;
+    // private Transform promptText;
 
     private LevelManager levelManager;
 
@@ -16,30 +16,24 @@ public class Door : MonoBehaviour
     void Start()
     {
         levelManager = LevelManager.instance;
-        promptText = transform.Find("Canvas").Find("Prompt");
+        // promptText = transform.Find("Canvas").Find("Prompt");
     }
 
     // Update is called once per frame
     void Update()
     {
-        promptText.gameObject.SetActive(false);
-    }
 
-    public void onHover(Transform cam)
-    {
-        promptText.gameObject.SetActive(true);
-        promptText.rotation = cam.rotation;
     }
 
     public void EnterDoor()
     {
         if (returnToHubOverride)
         {
-            levelManager.ReturnToHub();
+            levelManager.ReturnToCity();
         }
         else
         {
-            levelManager.EnterLevel(levelType);
+            levelManager.EnterLevel(levelType, transform);
         }
     }
 }

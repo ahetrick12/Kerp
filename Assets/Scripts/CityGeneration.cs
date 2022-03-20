@@ -32,7 +32,7 @@ public class CityGeneration : MonoBehaviour
     private float placementOffset;
     private Transform hubBlock;
     private List<Transform> spawnpoints = new List<Transform>();
-    private Transform[] levelDoors;
+    private List<Transform> levelDoors;
 
     private bool assignHubFlag = false;
 
@@ -139,18 +139,18 @@ public class CityGeneration : MonoBehaviour
         }
 
         // Spawn doors at final points
-        levelDoors = new Transform[levelCount];
+        levelDoors = new List<Transform>();
         for(int i = 0; i < finalPoints.Count; i++)
         {
             Transform door = Instantiate(doorPrefab).transform;
             door.position = finalPoints[i].position;
             door.parent = finalPoints[i];
             door.GetComponentInChildren<Door>().levelType = (LevelManager.LevelType)Random.Range(0, System.Enum.GetValues(typeof(LevelManager.LevelType)).Length);
-            levelDoors[i] = door;
+            levelDoors.Add(door);
         }
     }
 
-    public Transform[] getLevelDoors() {
+    public List<Transform> getLevelDoors() {
         return levelDoors;
     }
 
