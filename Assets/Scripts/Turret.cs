@@ -168,11 +168,11 @@ public class Turret : MonoBehaviour
 
         Debug.Log(Vector3.SignedAngle(defaultDirection, target.transform.position - rotatingPart.transform.position, Vector3.up));
 
-        if(Vector3.SignedAngle(defaultDirection, target.transform.position - rotatingPart.transform.position, Vector3.up) > maxAngle)
+        if(Vector3.SignedAngle(defaultDirection, target.transform.position - rotatingPart.transform.position, Vector3.up) + 180 < maxAngle)
         {
             turretOrient = rightEdge;
         }
-        else if(Vector3.SignedAngle(defaultDirection, target.transform.position - rotatingPart.transform.position, Vector3.up) < -maxAngle)
+        else if(Vector3.SignedAngle(defaultDirection, target.transform.position - rotatingPart.transform.position, Vector3.up) + 180 > -maxAngle)
         {
             turretOrient = leftEdge;
         }
@@ -183,7 +183,9 @@ public class Turret : MonoBehaviour
 
         rotatingPart.transform.forward = Vector3.Lerp(rotatingPart.transform.forward, turretOrient, (Time.time - detectedTime) / turretLockOnTime);
 
-        Debug.Log($"Turret lock on: {(((Time.time - detectedTime) / turretLockOnTime) * 100f):F2}%");
+        Debug.Log(Vector3.SignedAngle(defaultDirection, target.transform.position - rotatingPart.transform.position, Vector3.up));
+
+        //Debug.Log($"Turret lock on: {(((Time.time - detectedTime) / turretLockOnTime) * 100f):F2}%");
 
         // shoot
         if(lastShot + shootCooldown < Time.time && hasDetected)
