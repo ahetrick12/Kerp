@@ -7,7 +7,7 @@ public class Interactable : MonoBehaviour
     [HideInInspector]
     public bool clicked = false;
 
-    private Transform promptText;   
+    public Transform promptText;   
 
     void Start()
     {
