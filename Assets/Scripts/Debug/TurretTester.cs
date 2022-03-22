@@ -5,19 +5,19 @@ using UnityEngine;
 public class TurretTester : MonoBehaviour
 {
     public Transform target;
-    public Vector3 firstVector;
-    public Vector3 rightVector;
+    private Vector3 rightVector;    // from player towards right of turret
     private Vector3 alpha; // orthogonal vector
     public float sParam;
     public float tParam;
+    public float radius;
+    public int subdivisions;
+    public float degrees;
 
     // Start is called before the first frame update
     void Start()
     {
         alpha = target.position - this.transform.position;
-
-        firstVector = new Vector3(0 , 1, 0).normalized;
-        rightVector = Vector3.Cross(firstVector, alpha ).normalized;
+        rightVector = Vector3.Cross(Vector3.up, alpha ).normalized;
     }
 
     // Update is called once per frame
@@ -25,14 +25,25 @@ public class TurretTester : MonoBehaviour
     {
         
         alpha = target.position - this.transform.position;  // orthogonal vector
-        this.transform.forward = alpha.normalized;
+        this.transform.forward = alpha.normalized;          // point the turret to the player
 
-        Vector3 s = target.rotation * new Vector3(0, 1, 0);
-
-        //firstVector = target.rotation * firstVector;
-        rightVector = Vector3.Cross(firstVector, alpha ).normalized;
+        rightVector = Vector3.Cross(Vector3.up, alpha ).normalized;     // get one vector to scale parametrically
 
         Vector3 planeVector = GeneratePointOnPlane(sParam, tParam);
+
+
+        //DrawRingOnPlane(radius, subdivisions);
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            DrawRingOnPlane(radius, subdivisions);
+        }
+
+        //Vector3 testingPoint = GeneratePointOnPlane(Mathf.Sin(degrees * Mathf.Deg2Rad), Mathf.Cos(degrees * Mathf.Deg2Rad));
+        //Debug.DrawRay(testingPoint, alpha, Color.yellow, 5f);
+
+        //Debug.Log(Mathf.Sin(90 * Mathf.Deg2Rad) * Mathf.Rad2Deg);
+        //Debug.Log(Mathf.Sin(90 * Mathf.Deg2Rad));
+
 
         Debug.DrawRay(planeVector, alpha.normalized, Color.black, 0.01f);
 
@@ -44,12 +55,18 @@ public class TurretTester : MonoBehaviour
         Debug.DrawRay(target.position, rightVector, Color.green, 0.01f);
     }
 
-    private float ImplicitD(Vector3 ortho, Vector3 point)
+    public void DrawRingOnPlane(float radius, int subdivisions)
     {
-        // gets the d value in the implicit formula of a plane
-        // takes parameters of an orthogonal vector and a point on the plane
+        float theta = 360f / subdivisions;
+        Vector3[] points = new Vector3[subdivisions];
 
-        return (-ortho.x * point.x - ortho.y * point.y - ortho.z * point.z);
+        for(int i = 0; i < subdivisions; i++)
+        {
+            points[i] = GeneratePointOnPlane(radius * Mathf.Sin(theta * i * Mathf.Deg2Rad), radius * Mathf.Cos(theta * i * Mathf.Deg2Rad) );
+            Debug.DrawRay(points[i], alpha, Color.yellow, 5f);
+        }
+
+        //Vector3 testingPoint = GeneratePointOnPlane(Mathf.Sin(degrees * Mathf.Deg2Rad), Mathf.Cos(degrees * Mathf.Deg2Rad));
     }
 
     // private Vector3 GetOrthogonal()
@@ -57,7 +74,7 @@ public class TurretTester : MonoBehaviour
 
     // }
 
-    public Vector3 GeneratePointOnPlane(float s, float t)
+    public Vector3 GeneratePointOnPlane(float s, float t)   // up then over
     {
         return target.transform.position + (s * this.transform.up) + (t * rightVector);
     }

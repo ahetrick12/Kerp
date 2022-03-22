@@ -867,8 +867,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1188421931}
-  firstVector: {x: 0, y: 0, z: 0}
-  secondVector: {x: 0, y: 0, z: 0}
+  sParam: 0
+  tParam: 0
+  radius: 1
+  subdivisions: 4
 --- !u!1 &594179061
 GameObject:
   m_ObjectHideFlags: 0
