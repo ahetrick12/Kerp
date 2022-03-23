@@ -870,7 +870,10 @@ MonoBehaviour:
   sParam: 0
   tParam: 0
   radius: 1
-  subdivisions: 4
+  subdivisions: 16
+  degrees: 0
+  sightDistance: 2
+  sightRadius: 0.25
 --- !u!1 &594179061
 GameObject:
   m_ObjectHideFlags: 0
