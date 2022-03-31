@@ -19,6 +19,9 @@ public class Door : MonoBehaviour
     {
         levelManager = LevelManager.instance;
         // promptText = transform.Find("Canvas").Find("Prompt");
+
+        AudioSource source = GetComponent<AudioSource>(); 
+        source.time = 1;
     }
 
     // Update is called once per frame
@@ -28,12 +31,7 @@ public class Door : MonoBehaviour
     }
 
     public void EnterDoor()
-    {
-        AudioSource source = GetComponent<AudioSource>(); 
-        source.time = 1f;
-        source.Play();
-    
-
+    {    
         if (returnToCityOverride)
         {
             levelManager.ReturnToCity(true);

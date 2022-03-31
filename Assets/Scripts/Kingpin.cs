@@ -10,18 +10,18 @@ public class Kingpin : MonoBehaviour
 
     private string[] dialogue1 = new string[]
     {
-        "What do you want, henchman? Oh wait... it's you: the one with the jetpack.",
-        "In that case, good thing you are here. I have errands that need running.",
-        "Or should I say flying.",
+        "What do you want, henchman? Oh wait... it's you. The one with the jetpack.",
+        "In that case, good thing you are here! I have errands that need running.",
+        "Or should I say... flying!",
         "Anyhow, why don't you go and collect some more kerp from my underlings.",
-        "You remember how right?",
-        "Fly to the roof top, I've sent you the locations, and break in.",
-        "Sneak through, or be loud about it, it makes no difference to me,",
+        "You remember how, right?",
+        "Fly to the rooftop - I've sent you the locations - and break in.",
+        "Sneak through or be loud about it, it makes no difference to me,",
         "And harvest all the kerp you can carry.",
         "But remember two important things:",
         "Don't get caught,",
         "And don't come back empty handed.",
-        "Now, run along."
+        "Now, run along!"
     };
 
     private string[] dialogue2 = new string[]
@@ -72,7 +72,7 @@ public class Kingpin : MonoBehaviour
         {
             if(dialogueIndex < dialogue1.Length)
             {
-                speechBubble.text = dialogue1[dialogueIndex];
+                StartCoroutine(TypeSentence(dialogue1[dialogueIndex]));
                 dialogueIndex++;
             }
             else
@@ -85,7 +85,7 @@ public class Kingpin : MonoBehaviour
         {
             if(dialogueIndex  < dialogue2.Length)
             {
-                speechBubble.text = dialogue2[dialogueIndex];
+                StartCoroutine(TypeSentence(dialogue2[dialogueIndex]));
                 dialogueIndex++;
             }
             else
@@ -98,7 +98,7 @@ public class Kingpin : MonoBehaviour
         {
             if(dialogueIndex  < dialogue3.Length)
             {
-                speechBubble.text = dialogue3[dialogueIndex];
+                StartCoroutine(TypeSentence(dialogue3[dialogueIndex]));
                 dialogueIndex++;
             }
             else
@@ -109,6 +109,23 @@ public class Kingpin : MonoBehaviour
         }
         
         
+    }
+
+    IEnumerator TypeSentence(string sentence)//, bool autoFinish)
+    {
+        speechBubble.text = "";
+        foreach(char letter in sentence.ToCharArray())
+        {
+            speechBubble.text += letter;
+            yield return new WaitForSeconds(0.020f);
+        }
+
+        // if (autoFinish)
+        // {
+        //     yield return new WaitForSeconds(4);
+
+        //     dialogueInUse = false;
+        // }
     }
 
     // public void onHover(Transform cam)

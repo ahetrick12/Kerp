@@ -14,10 +14,10 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
-  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_Fog: 1
+  m_FogColor: {r: 0.08235294, g: 0.11764706, b: 0.15294118, a: 0.7372549}
   m_FogMode: 3
-  m_FogDensity: 0.01
+  m_FogDensity: 0.02
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -195,6 +195,87 @@ MonoBehaviour:
   levelCount: 3
   minLevelSpawnDistance: 10
   hubPoint: {fileID: 0}
+--- !u!1001 &131050401
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 160244, guid: 05d9ebacb3ef5f7429ede69f903ddc52, type: 3}
+      propertyPath: m_Name
+      value: low_poly_clouds_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 160244, guid: 05d9ebacb3ef5f7429ede69f903ddc52, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 454804, guid: 05d9ebacb3ef5f7429ede69f903ddc52, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 454804, guid: 05d9ebacb3ef5f7429ede69f903ddc52, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 454804, guid: 05d9ebacb3ef5f7429ede69f903ddc52, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 454804, guid: 05d9ebacb3ef5f7429ede69f903ddc52, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 454804, guid: 05d9ebacb3ef5f7429ede69f903ddc52, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 454804, guid: 05d9ebacb3ef5f7429ede69f903ddc52, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 454804, guid: 05d9ebacb3ef5f7429ede69f903ddc52, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 454804, guid: 05d9ebacb3ef5f7429ede69f903ddc52, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 454804, guid: 05d9ebacb3ef5f7429ede69f903ddc52, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 454804, guid: 05d9ebacb3ef5f7429ede69f903ddc52, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 454804, guid: 05d9ebacb3ef5f7429ede69f903ddc52, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19865482, guid: 05d9ebacb3ef5f7429ede69f903ddc52, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19865482, guid: 05d9ebacb3ef5f7429ede69f903ddc52, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19865482, guid: 05d9ebacb3ef5f7429ede69f903ddc52, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19911588, guid: 05d9ebacb3ef5f7429ede69f903ddc52, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19911588, guid: 05d9ebacb3ef5f7429ede69f903ddc52, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 05d9ebacb3ef5f7429ede69f903ddc52, type: 3}
 --- !u!1 &762230068
 GameObject:
   m_ObjectHideFlags: 0
@@ -656,6 +737,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2131209038757233791, guid: 7f0a1bdafe99db74cb1754e309d55f87, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: e3204aaeab126544a9ac652200e54020, type: 3}
     - target: {fileID: 8820164756369200864, guid: 7f0a1bdafe99db74cb1754e309d55f87, type: 3}
       propertyPath: m_Name
       value: Main Canvas

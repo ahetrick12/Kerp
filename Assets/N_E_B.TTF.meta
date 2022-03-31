@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: ccfe1dd6f80f9094997824e5713d5989
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Noir-et-Blanc
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: e3204aaeab126544a9ac652200e54020, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -74,11 +74,13 @@ public class PlayerMovement : MonoBehaviour
     [Header("Audio")]
 
     public AudioSource jetpack;
+    public AudioSource hit;
 
     [HideInInspector]
     public bool isDead = false;
 
     private float zRotSmoothVel;
+    private float startJetpackVol, jetpackVolSmoothTime;
 
     // Start is called before the first frame update
     void Start()
@@ -95,6 +97,9 @@ public class PlayerMovement : MonoBehaviour
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
         }
+
+        startJetpackVol = jetpack.volume;
+        jetpack.volume = 0;
     }
 
     // Update is called once per frame
@@ -125,12 +130,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if(!isFlying)
         {
-            jetpack.volume = 0;
+            jetpack.volume = Mathf.SmoothDamp(jetpack.volume, 0, ref jetpackVolSmoothTime, 0.15f);
             OnGround();            
         }
         else
         {
-            jetpack.volume = 1;
+            jetpack.volume = Mathf.SmoothDamp(jetpack.volume, startJetpackVol, ref jetpackVolSmoothTime, 0.15f);;
             InFlight();
         }
     }
@@ -140,6 +145,7 @@ public class PlayerMovement : MonoBehaviour
         lastHealthIncrease = Time.time;
         health--;
         zRot = flinchAngle;
+        hit.PlayOneShot(hit.clip);
     }
 
     private void UpdateHealth()

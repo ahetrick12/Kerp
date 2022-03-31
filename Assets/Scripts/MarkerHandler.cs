@@ -55,7 +55,8 @@ public class MarkerHandler : MonoBehaviour
                     continue;
                 }
 
-                if (levelDoors[i].GetComponentInChildren<Renderer>().isVisible)
+                //if (levelDoors[i].GetComponentInChildren<Renderer>().isVisible)
+                if (IsVisibleFrom(levelDoors[i].GetComponentInChildren<Renderer>(), cam))
                 {
                     markers[i].gameObject.SetActive(true);
                     
@@ -93,5 +94,18 @@ public class MarkerHandler : MonoBehaviour
             }
         }
         catch {}
+    }
+
+    // this works better than renderer.isVisible
+    private bool IsVisibleFrom(Renderer r, Camera camera) {
+    
+        if (Vector3.Dot(cam.transform.forward, r.transform.position - cam.transform.position) > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
